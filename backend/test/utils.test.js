@@ -1,6 +1,21 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { normalizeOutput, judgeStatus, normalizeGeneratedTests } from '../src/utils.js';
+import { normalizeOutput, judgeStatus, selectExecutionCases, normalizeGeneratedTests } from '../src/utils.js';
+
+test('submissions use handwritten cases and verified AI cases', () => {
+  const cases = [
+    { id: 'manual-1', source: 'manual', verified: false, visibility: 'sample' },
+    { id: 'manual-2', source: 'manual', verified: false, visibility: 'hidden' },
+    { id: 'ai-unverified', source: 'ai', verified: false, visibility: 'hidden' },
+    { id: 'ai-verified', source: 'ai', verified: true, visibility: 'hidden' },
+  ];
+  assert.deepEqual(selectExecutionCases(cases, true).map((item) => item.id), [
+    'manual-1', 'manual-2', 'ai-verified',
+  ]);
+  assert.deepEqual(selectExecutionCases(cases, false, ['manual-1']).map((item) => item.id), [
+    'manual-1',
+  ]);
+});
 
 test('normalizes line endings and trailing whitespace', () => {
   assert.equal(normalizeOutput('alpha  \r\nbeta\t\n\n'), 'alpha\nbeta');

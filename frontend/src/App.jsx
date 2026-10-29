@@ -20,7 +20,7 @@ import remarkGfm from "remark-gfm";
 import { api } from "./api.js";
 import {
   Activity,
-  ArrowDownToLine,
+  RotateCcw,
   ArrowLeft,
   ArrowRight,
   BookOpen,
@@ -68,7 +68,9 @@ const IconButton = ({ children, ...p }) => (
 );
 function AuthProvider({ children }) {
   const [user, setUser] = useState(() =>
-    JSON.parse(localStorage.getItem("cv_user") || "null"),
+    localStorage.getItem("cv_token")
+      ? JSON.parse(localStorage.getItem("cv_user") || "null")
+      : null,
   );
   const [loading, setLoading] = useState(!!localStorage.getItem("cv_token"));
   useEffect(() => {
@@ -79,7 +81,11 @@ function AuthProvider({ children }) {
         setUser(data.user);
         localStorage.setItem("cv_user", JSON.stringify(data.user));
       })
-      .catch(() => setUser(null))
+      .catch(() => {
+        localStorage.removeItem("cv_token");
+        localStorage.removeItem("cv_user");
+        setUser(null);
+      })
       .finally(() => setLoading(false));
   }, []);
   const login = (data) => {
@@ -1061,6 +1067,12 @@ function Workspace() {
       setBusy(false);
     }
   };
+  const resetCode = () => {
+    setCode(starters[language]);
+    setResult(null);
+    setError("");
+    setTab("testcases");
+  };
   const addTest = async () => {
     const input = prompt("Test input (multiline supported):");
     if (input === null) return;
@@ -1239,7 +1251,7 @@ function Workspace() {
                     <button className="text-link" onClick={() => editTest(t)}>
                       Edit
                     </button>
-                    {!t.verified && (
+                    {t.source === "ai" && !t.verified && (
                       <button
                         className="text-link"
                         onClick={() => approveTest(t)}
@@ -1311,11 +1323,12 @@ function Workspace() {
             </span>
             <div className="editor-options">
               <button
-                className="icon-btn"
-                title="Reset code"
-                onClick={() => setCode(starters[language])}
+                className="reset-code-btn"
+                type="button"
+                title="Reset code to starter template"
+                onClick={resetCode}
               >
-                <ArrowDownToLine size={15} />
+                <RotateCcw size={14} /> Reset
               </button>
               <button className="icon-btn" title="Font size">
                 <MoreHorizontal size={16} />

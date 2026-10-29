@@ -14,6 +14,14 @@ export function judgeStatus(results) {
   return 'Wrong Answer';
 }
 
+export function selectExecutionCases(tests, submit, testIds) {
+  return tests.filter((testCase) =>
+    submit
+      ? testCase.source === 'manual' || testCase.verified
+      : testCase.visibility === 'sample' || !testIds || testIds.includes(String(testCase.id))
+  );
+}
+
 export function normalizeGeneratedTests(candidates) {
   if (candidates && !Array.isArray(candidates) && typeof candidates === 'object') {
     candidates = candidates.testCases ?? candidates.test_cases ?? candidates.tests ?? candidates.cases;
