@@ -121,6 +121,7 @@ function Guard({ children }) {
 function Shell({ children }) {
   const { user, logout } = useAuth();
   const loc = useLocation();
+  const isSubmissionDetail = loc.pathname.startsWith("/submissions/");
   const [collapsed, setCollapsed] = useState(false);
   const items = [
     ["/", "Overview", LayoutDashboard],
@@ -148,7 +149,7 @@ function Shell({ children }) {
               key={href}
               to={href}
               title={label}
-              className={`nav-item ${loc.pathname === href ? "active" : ""}`}
+              className={`nav-item ${loc.pathname === href || (href === "/submissions" && isSubmissionDetail) ? "active" : ""}`}
             >
               <Icon size={17} />
               {!collapsed && <span>{label}</span>}
@@ -199,7 +200,7 @@ function Shell({ children }) {
             <span>Workspace</span>
             <ChevronRight size={14} />
             <strong>
-              {items.find((x) => x[0] === loc.pathname)?.[1] || "Solve problem"}
+              {isSubmissionDetail ? "Submission details" : items.find((x) => x[0] === loc.pathname)?.[1] || "Solve problem"}
             </strong>
           </div>
           <div className="top-actions">
@@ -1485,13 +1486,13 @@ function Workspace() {
                 submissions.length ? (
                   <div className="workspace-submissions">
                     {submissions.map((submission) => (
-                      <div className="workspace-submission" key={submission._id}>
+                      <Link className="workspace-submission" key={submission._id} to={`/submissions/${submission._id}`}>
                         <span className={`status-tag ${submission.status === "Accepted" ? "tag-green" : "tag-red"}`}>
                           {submission.status}
                         </span>
                         <span>{submission.language}</span>
                         <time>{new Date(submission.createdAt).toLocaleString()}</time>
-                      </div>
+                      </Link>
                     ))}
                   </div>
                 ) : (
@@ -1640,18 +1641,18 @@ function Submissions() {
           <span>SUBMITTED</span>
         </div>
         {rows.map((s) => (
-          <div className="submission-table-row" key={s._id}>
+          <Link className="submission-table-row" key={s._id} to={`/submissions/${s._id}`} title="View submitted code">
             <span
               className={`status-tag ${s.status === "Accepted" ? "tag-green" : "tag-red"}`}
             >
               {s.status}
             </span>
-            <Link to={`/problems/${s.problem?._id}`}>
-              {s.problem?.title || "Problem"}
-            </Link>
+            <span className="submission-problem-title">
+              {s.problem?.title || "Problem"} <ArrowRight size={13} />
+            </span>
             <span>{s.language}</span>
             <span>{new Date(s.createdAt).toLocaleString()}</span>
-          </div>
+          </Link>
         ))}
         {!rows.length && (
           <Empty
@@ -1661,6 +1662,75 @@ function Submissions() {
           />
         )}
       </section>
+    </div>
+  );
+}
+function SubmissionDetail() {
+  const { id } = useParams();
+  const [submission, setSubmission] = useState(null);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let canceled = false;
+    setLoading(true);
+    setError("");
+    api.get(`/submissions/${id}`)
+      .then((response) => {
+        if (!canceled) setSubmission(response.data.submission);
+      })
+      .catch((requestError) => {
+        if (!canceled) setError(requestError.response?.data?.error || "Could not load submission");
+      })
+      .finally(() => {
+        if (!canceled) setLoading(false);
+      });
+    return () => { canceled = true; };
+  }, [id]);
+
+  const passed = submission?.results?.filter((result) => result.passed).length || 0;
+  return (
+    <div className="page-content submission-detail-page">
+      <Link to="/submissions" className="back-link"><ArrowLeft size={15} /> All submissions</Link>
+      {loading ? (
+        <div className="skeleton-list" aria-label="Loading submission" />
+      ) : error ? (
+        <div className="error-banner" role="alert">{error}</div>
+      ) : submission && (
+        <>
+          <div className="page-heading">
+            <div>
+              <div className="eyebrow">SUBMISSION HISTORY</div>
+              <h1>Submitted solution<span className="heading-period">.</span></h1>
+              {submission.problem?._id ? (
+                <Link className="submission-detail-problem" to={`/problems/${submission.problem._id}`}>
+                  {submission.problem.title || "Open problem"} <ArrowRight size={14} />
+                </Link>
+              ) : (
+                <p>{submission.problem?.title || "Problem"}</p>
+              )}
+            </div>
+          </div>
+          <div className="panel submission-detail-meta">
+            <div><small>RESULT</small><span className={`status-tag ${submission.status === "Accepted" ? "tag-green" : "tag-red"}`}>{submission.status}</span></div>
+            <div><small>LANGUAGE</small><strong>{submission.language}</strong></div>
+            <div><small>TESTS PASSED</small><strong>{passed} / {submission.results?.length || 0}</strong></div>
+            <div><small>SUBMITTED</small><strong>{new Date(submission.createdAt).toLocaleString()}</strong></div>
+          </div>
+          <section className="panel submission-code-panel">
+            <div className="submission-code-heading"><h2>Submitted code</h2><span>Saved with this submission</span></div>
+            <Suspense fallback={<div className="submission-code-loading">Loading code editor…</div>}>
+              <Editor
+                height="480px"
+                language={submission.language === "cpp" ? "cpp" : submission.language}
+                theme="vs-dark"
+                value={submission.code || ""}
+                options={{ readOnly: true, domReadOnly: true, minimap: { enabled: false }, scrollBeyondLastLine: false, automaticLayout: true, fontSize: 14, fontFamily: "JetBrains Mono, Consolas, monospace", padding: { top: 18 } }}
+              />
+            </Suspense>
+          </section>
+        </>
+      )}
     </div>
   );
 }
@@ -1726,6 +1796,16 @@ export default function App() {
             <Guard>
               <Shell>
                 <Submissions />
+              </Shell>
+            </Guard>
+          }
+        />
+        <Route
+          path="/submissions/:id"
+          element={
+            <Guard>
+              <Shell>
+                <SubmissionDetail />
               </Shell>
             </Guard>
           }
