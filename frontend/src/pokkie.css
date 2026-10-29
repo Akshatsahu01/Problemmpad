@@ -1,0 +1,270 @@
+/* Pokkie uses the readable light layout, with its own rose-colored tokens. */
+html[data-theme="pokkie"]{
+  color-scheme:light;
+  --bg:#fff0f5;
+  --panel:#fff8fb;
+  --panel2:#ffe8f0;
+  --line:#efcbd9;
+  --muted:#79556a;
+  --text:#7d3c58;
+  --blue:#a12d62;
+  --green:#286d52;
+  --purple:#8d4c85;
+  background:var(--bg);
+  color:var(--text);
+}
+html[data-theme="pokkie"] body{background:radial-gradient(circle at 85% 5%,#ffd1dc80,transparent 32%),var(--bg);color:var(--text)}
+html[data-theme="pokkie"] .sidebar,
+html[data-theme="pokkie"] .topbar{background:#fff8fb;border-color:var(--line)}
+html[data-theme="pokkie"] .brand,
+html[data-theme="pokkie"] .breadcrumbs strong,
+html[data-theme="pokkie"] .page-heading h1,
+html[data-theme="pokkie"] .panel-header h2,
+html[data-theme="pokkie"] .stat-card strong,
+html[data-theme="pokkie"] .collection-card h3,
+html[data-theme="pokkie"] .empty-state h3,
+html[data-theme="pokkie"] .problem-title-head h1,
+html[data-theme="pokkie"] .problem-scroll h3,
+html[data-theme="pokkie"] .submission-code-heading h2{color:#71344f}
+html[data-theme="pokkie"] .brand-mark{background:linear-gradient(135deg,#ffb6c1,#ff69b4);color:#712949;box-shadow:0 5px 15px #ff69b449}
+html[data-theme="pokkie"] .brand-dot,
+html[data-theme="pokkie"] .heading-period,
+html[data-theme="pokkie"] .practice-symbol{color:#c83c7e}
+html[data-theme="pokkie"] .side-label,
+html[data-theme="pokkie"] .eyebrow,
+html[data-theme="pokkie"] .breadcrumbs,
+html[data-theme="pokkie"] .top-actions,
+html[data-theme="pokkie"] .page-heading p,
+html[data-theme="pokkie"] .panel-header p,
+html[data-theme="pokkie"] .stat-title,
+html[data-theme="pokkie"] .stat-card small,
+html[data-theme="pokkie"] .problem-name small,
+html[data-theme="pokkie"] .problem-date,
+html[data-theme="pokkie"] .collection-row small,
+html[data-theme="pokkie"] .collection-card p,
+html[data-theme="pokkie"] .collection-card-foot,
+html[data-theme="pokkie"] .empty-state p,
+html[data-theme="pokkie"] .list-footnote,
+html[data-theme="pokkie"] .form-sub,
+html[data-theme="pokkie"] .auth-switch,
+html[data-theme="pokkie"] .auth-secure{color:#79556a}
+html[data-theme="pokkie"] .nav-item{color:#79556a}
+html[data-theme="pokkie"] .nav-item:hover,
+html[data-theme="pokkie"] .nav-item.active{background:#ffe5ef;color:#8d2052}
+html[data-theme="pokkie"] .nav-item.active{box-shadow:inset 2px 0 #ff69b4}
+html[data-theme="pokkie"] .nav-shortcut,
+html[data-theme="pokkie"] .profile-row>svg{color:#79556a}
+html[data-theme="pokkie"] .vault-card,
+html[data-theme="pokkie"] .input-search{background:#fff5f9;border-color:var(--line)}
+html[data-theme="pokkie"] .avatar,
+html[data-theme="pokkie"] .user-avatar{background:#ffd1dc;color:#71344f}
+html[data-theme="pokkie"] .search-pill,
+html[data-theme="pokkie"] .search-pill kbd,
+html[data-theme="pokkie"] .input-search kbd{border-color:#e7bccd;color:#79556a}
+html[data-theme="pokkie"] .input-search,
+html[data-theme="pokkie"] .input-search input{color:#71344f}
+
+/* Cards and rows receive a gentle blossom-tinted surface. */
+html[data-theme="pokkie"] .panel,
+html[data-theme="pokkie"] .stat-card,
+html[data-theme="pokkie"] .test-card,
+html[data-theme="pokkie"] .code-preview{background:#fff8fb;border-color:var(--line);box-shadow:0 5px 18px #d8679820;border-radius:14px}
+html[data-theme="pokkie"] .panel:hover,
+html[data-theme="pokkie"] .stat-card:hover,
+html[data-theme="pokkie"] .test-card:hover{box-shadow:0 8px 23px #d8679833}
+html[data-theme="pokkie"] .practice-card{background:linear-gradient(125deg,#fff8fb,#ffdce9);border-color:#edbfd1;box-shadow:0 6px 20px #d8679826;border-radius:14px}
+html[data-theme="pokkie"] .practice-glow{background:#ff69b433}
+html[data-theme="pokkie"] .practice-copy h3{color:#71344f}
+html[data-theme="pokkie"] .practice-copy p{color:#79556a}
+html[data-theme="pokkie"] .stat-icon.blue,
+html[data-theme="pokkie"] .stat-icon.purple,
+html[data-theme="pokkie"] .collection-folder,
+html[data-theme="pokkie"] .empty-icon{background:#ffe0ec;color:#a12d62}
+html[data-theme="pokkie"] .stat-icon.orange{background:#ffecd8;color:#89520d}
+html[data-theme="pokkie"] .stat-icon.green{background:#e3f5ec;color:#286d52}
+html[data-theme="pokkie"] .problem-row,
+html[data-theme="pokkie"] .submission-row,
+html[data-theme="pokkie"] .collection-row,
+html[data-theme="pokkie"] .submission-table-row,
+html[data-theme="pokkie"] .workspace-submission,
+html[data-theme="pokkie"] .table-header,
+html[data-theme="pokkie"] .submission-table-head{border-color:#f0d5e0}
+html[data-theme="pokkie"] .problem-name>a,
+html[data-theme="pokkie"] .submission-title,
+html[data-theme="pokkie"] .collection-row,
+html[data-theme="pokkie"] .submission-table-row,
+html[data-theme="pokkie"] .workspace-submission,
+html[data-theme="pokkie"] .submission-problem-title{color:#71344f}
+html[data-theme="pokkie"] .problem-name>a:hover,
+html[data-theme="pokkie"] .submission-table-row>a:hover,
+html[data-theme="pokkie"] .submission-table-row:hover .submission-problem-title,
+html[data-theme="pokkie"] .text-link,
+html[data-theme="pokkie"] .collection-open,
+html[data-theme="pokkie"] .practice-link,
+html[data-theme="pokkie"] .submission-detail-problem,
+html[data-theme="pokkie"] .auth-switch a{color:#a12d62}
+html[data-theme="pokkie"] .text-link:hover,
+html[data-theme="pokkie"] .submission-detail-problem:hover{color:#7d2050}
+html[data-theme="pokkie"] .row-open,
+html[data-theme="pokkie"] .delete-small,
+html[data-theme="pokkie"] .collection-row>svg{color:#79556a}
+html[data-theme="pokkie"] .back-link{color:#79556a}
+html[data-theme="pokkie"] .back-link:hover{color:#a12d62}
+html[data-theme="pokkie"] .icon-btn:hover{background:#ffe8f0;color:#71344f}
+html[data-theme="pokkie"] .skeleton-list{background:linear-gradient(90deg,#ffe6ef,#fff5f9,#ffe6ef);background-size:200% 100%}
+html[data-theme="pokkie"] .submission-table-row:hover,
+html[data-theme="pokkie"] .workspace-submission:hover{background:#ffeaf2}
+
+/* Inputs and buttons use deeper rose text for reliable contrast. */
+html[data-theme="pokkie"] .create-form label,
+html[data-theme="pokkie"] .auth-form label,
+html[data-theme="pokkie"] .table-header,
+html[data-theme="pokkie"] .submission-table-head{color:#79556a}
+html[data-theme="pokkie"] .create-form input,
+html[data-theme="pokkie"] .create-form textarea,
+html[data-theme="pokkie"] .create-form select,
+html[data-theme="pokkie"] .auth-form input{background:#fffafd;border-color:#e8bdce;color:#71344f;border-radius:9px}
+html[data-theme="pokkie"] .create-form input::placeholder,
+html[data-theme="pokkie"] .create-form textarea::placeholder,
+html[data-theme="pokkie"] .auth-form input::placeholder{color:#866377}
+html[data-theme="pokkie"] .create-form input:focus,
+html[data-theme="pokkie"] .create-form textarea:focus,
+html[data-theme="pokkie"] .create-form select:focus,
+html[data-theme="pokkie"] .auth-form input:focus{border-color:#c83c7e;box-shadow:0 0 0 3px #ff69b43d}
+html[data-theme="pokkie"] .primary-btn,
+html[data-theme="pokkie"] .submit-btn{background:linear-gradient(120deg,#ffb6c1,#ffd1dc);border-color:#f0a7bf;color:#71344f;box-shadow:0 4px 13px #d8679833;border-radius:9px}
+html[data-theme="pokkie"] .primary-btn:hover,
+html[data-theme="pokkie"] .submit-btn:hover{background:linear-gradient(120deg,#ff9fbb,#ffc5d7);box-shadow:0 6px 18px #d8679855}
+html[data-theme="pokkie"] .secondary-btn,
+html[data-theme="pokkie"] .mini-btn,
+html[data-theme="pokkie"] .run-btn,
+html[data-theme="pokkie"] .reset-code-btn{background:#ffe8f0;border-color:#e8bdce;color:#71344f;border-radius:9px}
+html[data-theme="pokkie"] .secondary-btn:hover,
+html[data-theme="pokkie"] .mini-btn:hover,
+html[data-theme="pokkie"] .run-btn:hover,
+html[data-theme="pokkie"] .reset-code-btn:hover{background:#ffd1dc;box-shadow:0 0 0 2px #ff69b433}
+html[data-theme="pokkie"] .ai-parse-btn{background:#ffe8f1;border-color:#e7b9cf;color:#883b6b}
+html[data-theme="pokkie"] .ai-parse-btn:hover{background:#ffd9e8}
+html[data-theme="pokkie"] .ai-parse-btn span{color:#79556a}
+html[data-theme="pokkie"] .theme-switcher-trigger,
+html[data-theme="pokkie"] .theme-menu{background:#fff8fb;border-color:#e8bdce;color:#71344f;box-shadow:0 8px 22px #d8679826}
+html[data-theme="pokkie"] .theme-switcher-trigger:hover,
+html[data-theme="pokkie"] .theme-option:hover,
+html[data-theme="pokkie"] .theme-option[aria-checked="true"]{background:#ffe8f0}
+html[data-theme="pokkie"] .theme-option{color:#71344f}
+html[data-theme="pokkie"] .theme-option-pokkie{color:#a12d62}
+html[data-theme="pokkie"] .theme-option-pokkie:hover,
+html[data-theme="pokkie"] .theme-option-pokkie[aria-checked="true"]{background:#ffd8e9}
+html[data-theme="pokkie"] :is(button,input,select,textarea,a):focus-visible{outline:2px solid #b5316e;outline-offset:2px}
+
+/* Reading, test cases, results, and saved code. */
+html[data-theme="pokkie"] .markdown,
+html[data-theme="pokkie"] .markdown h1,
+html[data-theme="pokkie"] .markdown h2,
+html[data-theme="pokkie"] .markdown h3,
+html[data-theme="pokkie"] .preview-body>h2,
+html[data-theme="pokkie"] .preview-body h4{color:#71344f}
+html[data-theme="pokkie"] .markdown code,
+html[data-theme="pokkie"] .markdown pre,
+html[data-theme="pokkie"] .constraint-box,
+html[data-theme="pokkie"] .test-body pre,
+html[data-theme="pokkie"] .output-comparison pre,
+html[data-theme="pokkie"] .execution-error pre{background:#fff0f5;border-color:#efcbd9;color:#71344f}
+html[data-theme="pokkie"] .test-card{color:#71344f}
+html[data-theme="pokkie"] .topic-list span,
+html[data-theme="pokkie"] .topic-chip,
+html[data-theme="pokkie"] .difficulty.custom{background:#f9e0f0;color:#85416d}
+html[data-theme="pokkie"] .problem-pane,
+html[data-theme="pokkie"] .editor-pane{background:#fff8fb}
+html[data-theme="pokkie"] .workspace-top,
+html[data-theme="pokkie"] .problem-pane,
+html[data-theme="pokkie"] .problem-title-head,
+html[data-theme="pokkie"] .problem-tabs,
+html[data-theme="pokkie"] .editor-toolbar,
+html[data-theme="pokkie"] .results-drawer,
+html[data-theme="pokkie"] .result-tabs,
+html[data-theme="pokkie"] .editor-footer,
+html[data-theme="pokkie"] .tests-panel,
+html[data-theme="pokkie"] .test-body,
+html[data-theme="pokkie"] .compact-case,
+html[data-theme="pokkie"] .run-case,
+html[data-theme="pokkie"] .submission-code-heading{border-color:#efcbd9}
+html[data-theme="pokkie"] .autosave,
+html[data-theme="pokkie"] .editor-saved,
+html[data-theme="pokkie"] .icon-btn,
+html[data-theme="pokkie"] .problem-scroll>p,
+html[data-theme="pokkie"] .test-card summary,
+html[data-theme="pokkie"] .test-type,
+html[data-theme="pokkie"] .test-body small,
+html[data-theme="pokkie"] .editor-footer,
+html[data-theme="pokkie"] .muted,
+html[data-theme="pokkie"] .compact-case,
+html[data-theme="pokkie"] .running,
+html[data-theme="pokkie"] .run-case{color:#79556a}
+html[data-theme="pokkie"] .problem-tabs button,
+html[data-theme="pokkie"] .result-tabs button{color:#79556a}
+html[data-theme="pokkie"] .problem-tabs button.selected,
+html[data-theme="pokkie"] .result-tabs button.active,
+html[data-theme="pokkie"] .language-select,
+html[data-theme="pokkie"] .language-select select{color:#a12d62}
+html[data-theme="pokkie"] .problem-tabs button span,
+html[data-theme="pokkie"] .result-tabs button span,
+html[data-theme="pokkie"] .test-head h3 span{background:#ffe1eb;color:#79556a}
+html[data-theme="pokkie"] .language-select option{background:#fff8fb;color:#71344f}
+html[data-theme="pokkie"] .compact-case code,
+html[data-theme="pokkie"] .run-case summary>small,
+html[data-theme="pokkie"] .run-case summary>svg,
+html[data-theme="pokkie"] .output-comparison label,
+html[data-theme="pokkie"] .execution-error label,
+html[data-theme="pokkie"] .submission-table-row>span:last-child,
+html[data-theme="pokkie"] .workspace-submission time,
+html[data-theme="pokkie"] .submission-detail-meta small,
+html[data-theme="pokkie"] .submission-code-heading span{color:#79556a}
+
+/* Positive and error states retain recognizable meaning. */
+html[data-theme="pokkie"] .error-banner{background:#fff0f2;border-color:#e5aab8;color:#912b44}
+html[data-theme="pokkie"] .ai-generation-notice{background:#ecf8f1;border-color:#bddfc9;color:#286d52}
+html[data-theme="pokkie"] .unverified{color:#82500c}
+html[data-theme="pokkie"] .run-error,
+html[data-theme="pokkie"] .run-summary.rejected strong,
+html[data-theme="pokkie"] .run-case .fail-text,
+html[data-theme="pokkie"] .run-case pre,
+html[data-theme="pokkie"] .execution-error pre{color:#a3333d}
+
+/* Sign-in and registration screens. */
+html[data-theme="pokkie"] .auth-page{background:#fff0f5}
+html[data-theme="pokkie"] .auth-visual{background:radial-gradient(circle at 28% 34%,#ffd1dc 0,transparent 49%),linear-gradient(145deg,#fff8fb,#ffe5ee);border-color:#efcbd9}
+html[data-theme="pokkie"] .visual-copy h1,
+html[data-theme="pokkie"] .auth-form h2{color:#71344f}
+html[data-theme="pokkie"] .visual-copy h1 em,
+html[data-theme="pokkie"] .auth-form>.eyebrow{color:#a12d62}
+html[data-theme="pokkie"] .mobile-brand{color:#71344f}
+html[data-theme="pokkie"] .visual-copy>.eyebrow,
+html[data-theme="pokkie"] .visual-copy>p,
+html[data-theme="pokkie"] .auth-footer{color:#79556a}
+html[data-theme="pokkie"] .code-head,
+html[data-theme="pokkie"] .code-status{border-color:#efcbd9;color:#79556a}
+html[data-theme="pokkie"] .code-preview pre{color:#71344f}
+html[data-theme="pokkie"] .code-purple{color:#8d4c85}
+html[data-theme="pokkie"] .code-blue{color:#a12d62}
+
+/* Deliberately few fixed, compositor-friendly petals; they never receive input. */
+.petal-overlay{position:fixed;inset:0;z-index:15;overflow:hidden;pointer-events:none;contain:layout paint}
+.petal{position:absolute;top:-24px;left:var(--left);width:var(--size);height:calc(var(--size)*.68);border-radius:80% 10% 80% 10%;background:linear-gradient(135deg,#ffd1dc,#ff91b8);box-shadow:0 0 5px #ff69b44d;opacity:.58;transform:translate3d(0,-30px,0) rotate(0deg);animation:petal-fall var(--duration) linear infinite;animation-delay:var(--delay);will-change:transform}
+.petal:nth-child(1){--left:6%;--size:10px;--duration:17s;--delay:-2s;--drift:45px;--rotation:280deg}
+.petal:nth-child(2){--left:19%;--size:14px;--duration:22s;--delay:-12s;--drift:-70px;--rotation:-320deg}
+.petal:nth-child(3){--left:34%;--size:9px;--duration:19s;--delay:-7s;--drift:60px;--rotation:300deg}
+.petal:nth-child(4){--left:49%;--size:13px;--duration:25s;--delay:-16s;--drift:-55px;--rotation:-240deg}
+.petal:nth-child(5){--left:62%;--size:11px;--duration:21s;--delay:-4s;--drift:75px;--rotation:340deg}
+.petal:nth-child(6){--left:76%;--size:15px;--duration:24s;--delay:-19s;--drift:-60px;--rotation:-300deg}
+.petal:nth-child(7){--left:87%;--size:9px;--duration:18s;--delay:-10s;--drift:50px;--rotation:250deg}
+.petal:nth-child(8){--left:96%;--size:12px;--duration:23s;--delay:-14s;--drift:-65px;--rotation:-310deg}
+@keyframes petal-fall{to{transform:translate3d(var(--drift),calc(100vh + 45px),0) rotate(var(--rotation))}}
+
+/* A small floral signature on headings, without cluttering controls. */
+html[data-theme="pokkie"] :is(.page-heading h1,.panel-header h2,.problem-title-head h1)::after{content:" ✿";color:#d95091;font-size:.67em;vertical-align:middle}
+html[data-theme="pokkie"] :is(.primary-btn,.submit-btn){position:relative}
+html[data-theme="pokkie"] :is(.primary-btn,.submit-btn)::after{content:"♥";position:absolute;right:6px;top:-11px;color:#d95091;font-size:13px;opacity:0;transform:translateY(5px) rotate(-15deg);transition:opacity .22s ease,transform .22s ease;pointer-events:none}
+html[data-theme="pokkie"] :is(.primary-btn,.submit-btn):hover::after{opacity:.8;transform:translateY(-2px) rotate(12deg)}
+@media(max-width:720px){html[data-theme="pokkie"] .sidebar{background:#fff8fb;border-color:var(--line)}html[data-theme="pokkie"] .nav-item.active{box-shadow:inset 0 2px #ff69b4}.petal:nth-child(n+6){display:none}}
+@media(prefers-reduced-motion:reduce){.petal-overlay{display:none}html[data-theme="pokkie"] :is(.primary-btn,.submit-btn)::after{display:none}}
