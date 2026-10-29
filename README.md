@@ -27,7 +27,7 @@ Frontend: `http://localhost:5173`. API: `http://127.0.0.1:4000/api/health`.
 
 ## Integrations
 
-Gemini is called only from the backend using `GOOGLE_API_KEY`/`GEMINI_API_KEY`. Generated test cases are labeled unverified because model-provided expected outputs are not independently checked. Review them before use. Parsing and test generation are limited to 10 calls/hour per IP.
+Gemini is called only from the backend using `GOOGLE_API_KEY`/`GEMINI_API_KEY`. Generated test cases are labeled unverified because model-provided expected outputs are not independently checked. Review them before use. Parsing and test generation are limited to 10 calls/hour per IP. AI test generation starts with `GEMINI_MODEL` (default `gemini-2.5-flash`) and, on a 503 overload, tries `gemini-3.6-flash`, `gemini-3.5-flash-lite`, then `gemini-2.5-flash-lite`. An unavailable model (404) is skipped. Set `GEMINI_MODELS` to an ordered comma-separated list to override the full sequence. A 429 usage limit does not trigger model switching; if every model is unavailable, users can add test cases manually.
 
 Code execution sends source and input to OnlineCompiler.io's Judge0-compatible submissions endpoint (`https://api.onlinecompiler.io/api/judge0`). Add your REST API key as `ONLINECOMPILER_API_KEY` in the project root `.env`; set `ONLINECOMPILER_API_URL` only if you need to override the endpoint. The backend keeps the key server-side and sends code with stdin, then compares the returned output with each expected output. Function-only problems may need a language-specific harness added to the problem definition. Legacy `JUDGE0_API_KEY` and `JUDGE0_API_URL` variables remain supported for existing configurations.
 
@@ -37,7 +37,7 @@ By default, CORS accepts requests from any frontend origin. Set `CLIENT_ORIGIN` 
 
 Passwords use bcrypt. API routes require a bearer JWT; private problems, drafts and submissions are scoped to their owner. Hidden test inputs and expected outputs are filtered from reads by non-owners. Markdown is rendered as React text with raw HTML disabled. `.env` is gitignored.
 
-MVP limitations: authentication uses browser local storage tokens; use HTTPS in deployment and consider HttpOnly cookie sessions with CSRF protections. Public sharing is available for problem reads but there is no public profile/discovery UI. Collection membership can be added and removed with the collection routes. Sample tests can be run directly; Submit runs only test cases marked `verified`, which should be reviewed and marked approved before shipping. Set the test case `verified` flag via the API/database after checking it. AI-generated cases are never auto-approved. A production judge deployment should add execution quotas, queueing, stricter provider timeouts and an isolated self-hosted execution environment.
+MVP limitations: authentication uses browser local storage tokens; use HTTPS in deployment and consider HttpOnly cookie sessions with CSRF protections. Public sharing is available for problem reads but there is no public profile/discovery UI. Collection membership can be added and removed with the collection routes. Sample tests can be run directly; Submit runs handwritten cases and verified AI cases. AI-generated cases are never auto-approved. A production judge deployment should add execution quotas, queueing, stricter provider timeouts and an isolated self-hosted execution environment.
 
 ## Commands
 

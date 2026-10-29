@@ -61,6 +61,19 @@ const asText = (value) => {
   if (typeof value === "object") return JSON.stringify(value, null, 2);
   return String(value);
 };
+const aiErrorMessage = (error, fallback, manualOption) => {
+  const serverMessage = error.response?.data?.error;
+  if (typeof serverMessage === "string" && !serverMessage.trim().startsWith("{")) {
+    return serverMessage;
+  }
+  if (error.response?.status === 429) {
+    return `AI usage limit reached. Try again later, or ${manualOption}.`;
+  }
+  if (error.response?.status === 503) {
+    return `AI is temporarily unavailable. Try again in a few minutes, or ${manualOption}.`;
+  }
+  return fallback;
+};
 const IconButton = ({ children, ...p }) => (
   <button className="icon-btn" {...p}>
     {children}
@@ -818,7 +831,7 @@ function ProblemForm() {
           : current.topics,
       }));
     } catch (e) {
-      setErr(e.response?.data?.error || "AI parsing failed");
+      setErr(aiErrorMessage(e, "AI parsing failed. Please try again or edit the problem manually.", "edit the problem manually"));
     } finally {
       setAi(false);
     }
@@ -1003,6 +1016,7 @@ function Workspace() {
     [result, setResult] = useState(null),
     [busy, setBusy] = useState(false),
     [generating, setGenerating] = useState(false),
+    [repairingAiInputs, setRepairingAiInputs] = useState(false),
     [generationComplete, setGenerationComplete] = useState(false),
     [generationMessage, setGenerationMessage] = useState(""),
     [tab, setTab] = useState("testcases"),
@@ -1106,6 +1120,9 @@ function Workspace() {
     generationComplete ||
     Boolean(problem?.aiTestsGeneratedAt) ||
     tests.some((testCase) => testCase.source === "ai");
+  const hasObjectAiInputs = tests.some(
+    (testCase) => testCase.source === "ai" && /^\s*\{/.test(testCase.input),
+  );
   const gen = async () => {
     if (generating || aiAlreadyGenerated) return;
     setGenerating(true);
@@ -1122,7 +1139,7 @@ function Workspace() {
         "AI candidates are unverified; review expected outputs before relying on them.",
       );
     } catch (e) {
-      const message = e.response?.data?.error || e.message || "Generation failed";
+      const message = aiErrorMessage(e, "AI test generation failed. Please try again or add test cases manually.", "add test cases manually");
       setGenerationMessage(message);
       if (e.response?.status === 409 && message.includes("already been generated")) {
         setGenerationComplete(true);
@@ -1131,6 +1148,24 @@ function Workspace() {
       }
     } finally {
       setGenerating(false);
+    }
+  };
+  const repairAiInputs = async () => {
+    setRepairingAiInputs(true);
+    setError("");
+    try {
+      const { data } = await api.post(`/problems/${id}/repair-ai-inputs`);
+      setTests(data.tests);
+      setGenerationComplete(true);
+      setGenerationMessage(
+        data.updated
+          ? `Reformatted ${data.updated} AI test input${data.updated === 1 ? "" : "s"}. Review each case before approving its expected output.`
+          : "No AI test inputs could be reformatted automatically. Edit any remaining cases to match your sample input.",
+      );
+    } catch (e) {
+      setError(e.response?.data?.error || "Could not repair AI test inputs");
+    } finally {
+      setRepairingAiInputs(false);
     }
   };
   const delTest = async (t) => {
@@ -1293,6 +1328,15 @@ function Workspace() {
                       ? "AI test cases generated"
                       : "Generate with AI"}
                 </button>
+                {hasObjectAiInputs && (
+                  <button
+                    className="text-link"
+                    onClick={repairAiInputs}
+                    disabled={busy || generating || repairingAiInputs}
+                  >
+                    {repairingAiInputs ? "Fixing AI inputs…" : "Fix AI input format"}
+                  </button>
+                )}
                 <button className="text-link" onClick={addTest}>
                   <Plus size={15} /> Add test
                 </button>
