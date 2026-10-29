@@ -37,7 +37,7 @@ By default, CORS accepts requests from any frontend origin. Set `CLIENT_ORIGIN` 
 
 Passwords use bcrypt. API routes require a bearer JWT; private problems, drafts and submissions are scoped to their owner. Hidden test inputs and expected outputs are filtered from reads by non-owners. Markdown is rendered as React text with raw HTML disabled. `.env` is gitignored.
 
-MVP limitations: authentication uses browser local storage tokens; use HTTPS in deployment and consider HttpOnly cookie sessions with CSRF protections. Public sharing is available for problem reads but there is no public profile/discovery UI. Collection membership can be added and removed with the collection routes. Sample tests can be run directly; Submit runs only test cases marked `verified`, which should be reviewed and marked approved before shipping. Set the test case `verified` flag via the API/database after checking it. AI-generated cases are never auto-approved. A production judge deployment should add execution quotas, queueing, stricter provider timeouts and an isolated self-hosted execution environment.
+MVP limitations: authentication uses browser local storage tokens; use HTTPS in deployment and consider HttpOnly cookie sessions with CSRF protections. Public sharing is available for problem reads but there is no public profile/discovery UI. Collection membership can be added and removed with the collection routes. Sample tests can be run directly; Submit runs handwritten cases and verified AI cases. AI-generated cases are never auto-approved. A production judge deployment should add execution quotas, queueing, stricter provider timeouts and an isolated self-hosted execution environment.
 
 ## Commands
 
