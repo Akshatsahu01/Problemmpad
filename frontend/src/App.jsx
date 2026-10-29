@@ -2,6 +2,7 @@ import React, {
   createContext,
   useContext,
   useEffect,
+  useRef,
   useState,
   Suspense,
 } from "react";
@@ -15,6 +16,26 @@ import {
   useLocation,
 } from "react-router-dom";
 const Editor = React.lazy(() => import("@monaco-editor/react"));
+const definePokkieEditorTheme = (monaco) => monaco.editor.defineTheme("pokkie", {
+  base: "vs",
+  inherit: true,
+  rules: [
+    { token: "comment", foreground: "9A7184" },
+    { token: "keyword", foreground: "A12D62" },
+    { token: "string", foreground: "8A5266" },
+    { token: "number", foreground: "9A3A72" },
+  ],
+  colors: {
+    "editor.background": "#FFF8FB",
+    "editor.foreground": "#592B42",
+    "editorLineNumber.foreground": "#946D80",
+    "editorLineNumber.activeForeground": "#7D3C58",
+    "editor.lineHighlightBackground": "#FFEAF2",
+    "editor.selectionBackground": "#F9C6DB",
+    "editorCursor.foreground": "#A12D62",
+    "editorGutter.background": "#FFF8FB",
+  },
+});
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { api } from "./api.js";
@@ -41,10 +62,13 @@ import {
   LogOut,
   Menu,
   MoreHorizontal,
+  Moon,
   Plus,
+  Flower2,
   Search,
   Settings,
   ShieldCheck,
+  Sun,
   Terminal,
   Trash2,
   Upload,
@@ -55,24 +79,117 @@ import {
 
 const AuthContext = createContext(null);
 const useAuth = () => useContext(AuthContext);
+const ThemeContext = createContext(null);
+const useTheme = () => useContext(ThemeContext);
+function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState(() =>
+    ["light", "dark", "pokkie"].includes(document.documentElement.dataset.theme)
+      ? document.documentElement.dataset.theme
+      : "dark",
+  );
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme === "dark" ? "dark" : "light";
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "dark" ? "#0c1118" : theme === "pokkie" ? "#fff0f5" : "#f5f7fb");
+    try { localStorage.setItem("problempad-theme", theme); } catch { /* Theme still works for this visit. */ }
+  }, [theme]);
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+const themeOptions = [
+  { id: "light", label: "Light Mode", Icon: Sun },
+  { id: "dark", label: "Dark Mode", Icon: Moon },
+  { id: "pokkie", label: "Pokkie Mode", Icon: Flower2 },
+];
+function ThemeSwitcher() {
+  const { theme, setTheme } = useTheme();
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef(null);
+  const optionRefs = useRef([]);
+  const selected = themeOptions.find((option) => option.id === theme) || themeOptions[1];
+  const SelectedIcon = selected.Icon;
+  useEffect(() => {
+    if (!open) return;
+    const onPointerDown = (event) => {
+      if (!rootRef.current?.contains(event.target)) setOpen(false);
+    };
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        rootRef.current?.querySelector(".theme-switcher-trigger")?.focus();
+      }
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
+  const moveFocus = (event, index) => {
+    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+      event.preventDefault();
+      optionRefs.current[(index + (event.key === "ArrowDown" ? 1 : 2)) % 3]?.focus();
+    } else if (event.key === "Home" || event.key === "End") {
+      event.preventDefault();
+      optionRefs.current[event.key === "Home" ? 0 : 2]?.focus();
+    }
+  };
+  return (
+    <div className="theme-switcher" ref={rootRef} onBlur={(event) => {
+      if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
+    }}>
+      <button className="theme-switcher-trigger" type="button" aria-label={`Theme: ${selected.label}`} aria-haspopup="menu" aria-expanded={open} onClick={() => setOpen((current) => !current)} onKeyDown={(event) => {
+        if (event.key === "ArrowDown") {
+          event.preventDefault();
+          setOpen(true);
+          requestAnimationFrame(() => optionRefs.current[themeOptions.findIndex((option) => option.id === theme)]?.focus());
+        }
+      }}>
+        <SelectedIcon size={16} aria-hidden="true" />
+        <span className="theme-switcher-label">{selected.label}</span>
+        <ChevronDown size={14} className={open ? "theme-chevron open" : "theme-chevron"} aria-hidden="true" />
+      </button>
+      {open && (
+        <div className="theme-menu" role="menu" aria-label="Choose theme">
+          {themeOptions.map(({ id, label, Icon }, index) => (
+            <button key={id} ref={(element) => { optionRefs.current[index] = element; }} className={`theme-option ${id === "pokkie" ? "theme-option-pokkie" : ""}`} type="button" role="menuitemradio" aria-checked={theme === id} onKeyDown={(event) => moveFocus(event, index)} onClick={() => { setTheme(id); setOpen(false); rootRef.current?.querySelector(".theme-switcher-trigger")?.focus(); }}>
+              <Icon size={17} aria-hidden="true" />
+              <span>{label}</span>
+              {theme === id && <Check size={15} aria-hidden="true" />}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+function PetalOverlay() {
+  const { theme } = useTheme();
+  if (theme !== "pokkie") return null;
+  return <div className="petal-overlay" aria-hidden="true">{Array.from({ length: 8 }, (_, index) => <span className="petal" key={index} />)}</div>;
+}
 const asText = (value) => {
   if (typeof value === "string") return value;
   if (value == null) return "";
   if (typeof value === "object") return JSON.stringify(value, null, 2);
   return String(value);
 };
-const aiErrorMessage = (error, fallback, manualOption) => {
-  const serverMessage = error.response?.data?.error;
-  if (typeof serverMessage === "string" && !serverMessage.trim().startsWith("{")) {
-    return serverMessage;
+const aiErrorMessage = (error, fallback) => {
+  const raw = error.response?.data?.error;
+  let provider = null;
+  if (typeof raw === "string" && raw.trim().startsWith("{")) {
+    try { provider = JSON.parse(raw).error; } catch { /* Use the status below. */ }
   }
-  if (error.response?.status === 429) {
-    return `AI usage limit reached. Try again later, or ${manualOption}.`;
-  }
-  if (error.response?.status === 503) {
-    return `AI is temporarily unavailable. Try again in a few minutes, or ${manualOption}.`;
-  }
-  return fallback;
+  const status = Number(provider?.code || error.response?.status);
+  if (status === 404 || /no longer available to new users/i.test(String(raw || "")))
+    return "The selected AI model is unavailable for this project. Try again later or continue manually.";
+  if (status === 429) return "Gemini usage limit reached. Try again later or continue manually.";
+  if (status === 503 && provider) return "Gemini is busy right now. Try again later or continue manually.";
+  return typeof raw === "string" && !raw.trim().startsWith("{") ? raw : fallback;
 };
 const IconButton = ({ children, ...p }) => (
   <button className="icon-btn" {...p}>
@@ -217,6 +334,7 @@ function Shell({ children }) {
             </strong>
           </div>
           <div className="top-actions">
+            <ThemeSwitcher />
             <div className="search-pill">
               <Search size={15} />
               <span>Search problems...</span>
@@ -320,6 +438,7 @@ function AuthPage({ mode }) {
         </div>
       </div>
       <div className="auth-form-wrap">
+        <div className="auth-theme-toggle"><ThemeSwitcher /></div>
         <div className="auth-form">
           <div className="mobile-brand">
             <span className="brand-mark">
@@ -831,7 +950,7 @@ function ProblemForm() {
           : current.topics,
       }));
     } catch (e) {
-      setErr(aiErrorMessage(e, "AI parsing failed. Please try again or edit the problem manually.", "edit the problem manually"));
+      setErr(aiErrorMessage(e, "AI parsing failed. You can continue entering the problem manually."));
     } finally {
       setAi(false);
     }
@@ -1007,6 +1126,7 @@ const starters = {
   java: "import java.util.*;\n\nclass Main {\n    public static void main(String[] args) {\n        // Your code here\n    }\n}\n",
 };
 function Workspace() {
+  const { theme } = useTheme();
   const { id } = useParams(),
     [problem, setProblem] = useState(null),
     [language, setLanguage] = useState("python"),
@@ -1116,16 +1236,14 @@ function Workspace() {
       setError(e.response?.data?.error || "Could not add test");
     }
   };
-  const aiAlreadyGenerated =
-    generationComplete ||
-    Boolean(problem?.aiTestsGeneratedAt) ||
-    tests.some((testCase) => testCase.source === "ai");
+  const hasAiTests = tests.some((testCase) => testCase.source === "ai");
   const hasObjectAiInputs = tests.some(
     (testCase) => testCase.source === "ai" && /^\s*\{/.test(testCase.input),
   );
   const gen = async () => {
-    if (generating || aiAlreadyGenerated) return;
+    if (generating) return;
     setGenerating(true);
+    setGenerationComplete(false);
     setGenerationMessage("");
     try {
       const { data } = await api.post(`/problems/${id}/generate-tests`);
@@ -1139,20 +1257,16 @@ function Workspace() {
         "AI candidates are unverified; review expected outputs before relying on them.",
       );
     } catch (e) {
-      const message = aiErrorMessage(e, "AI test generation failed. Please try again or add test cases manually.", "add test cases manually");
+      const message = aiErrorMessage(e, "AI test generation failed. Add test cases manually or try again later.");
       setGenerationMessage(message);
-      if (e.response?.status === 409 && message.includes("already been generated")) {
-        setGenerationComplete(true);
-        api.get(`/problems/${id}`).then((r) => setProblem(r.data.problem)).catch(() => {});
-        api.get(`/problems/${id}/test-cases`).then((r) => setTests(r.data.tests)).catch(() => {});
-      }
     } finally {
       setGenerating(false);
     }
   };
   const repairAiInputs = async () => {
     setRepairingAiInputs(true);
-    setError("");
+    setGenerationComplete(false);
+    setGenerationMessage("");
     try {
       const { data } = await api.post(`/problems/${id}/repair-ai-inputs`);
       setTests(data.tests);
@@ -1160,10 +1274,10 @@ function Workspace() {
       setGenerationMessage(
         data.updated
           ? `Reformatted ${data.updated} AI test input${data.updated === 1 ? "" : "s"}. Review each case before approving its expected output.`
-          : "No AI test inputs could be reformatted automatically. Edit any remaining cases to match your sample input.",
+          : "No AI inputs could be reformatted automatically. Edit the remaining cases to match your sample input.",
       );
     } catch (e) {
-      setError(e.response?.data?.error || "Could not repair AI test inputs");
+      setGenerationMessage(e.response?.data?.error || "Could not repair AI test inputs.");
     } finally {
       setRepairingAiInputs(false);
     }
@@ -1318,14 +1432,14 @@ function Workspace() {
                 <button
                   className="text-link"
                   onClick={gen}
-                  disabled={busy || generating || aiAlreadyGenerated}
+                  disabled={busy || generating || repairingAiInputs}
                   aria-live="polite"
                 >
                   <BrainCircuit size={15} />
                   {generating
                     ? "Generating test cases…"
-                    : aiAlreadyGenerated
-                      ? "AI test cases generated"
+                    : hasAiTests
+                      ? "Generate more with AI"
                       : "Generate with AI"}
                 </button>
                 {hasObjectAiInputs && (
@@ -1334,6 +1448,7 @@ function Workspace() {
                     onClick={repairAiInputs}
                     disabled={busy || generating || repairingAiInputs}
                   >
+                    <RotateCcw size={14} />
                     {repairingAiInputs ? "Fixing AI inputs…" : "Fix AI input format"}
                   </button>
                 )}
@@ -1396,9 +1511,10 @@ function Workspace() {
           <div className="monaco-wrap">
             <Suspense fallback={<div className="muted">Loading editor?</div>}>
               <Editor
+                beforeMount={definePokkieEditorTheme}
                 height="100%"
                 language={language === "cpp" ? "cpp" : language}
-                theme="vs-dark"
+                theme={theme === "dark" ? "vs-dark" : theme === "pokkie" ? "pokkie" : "vs"}
                 value={code}
                 onChange={(v) => setCode(v || "")}
                 options={{
@@ -1723,6 +1839,7 @@ function Submissions() {
   );
 }
 function SubmissionDetail() {
+  const { theme } = useTheme();
   const { id } = useParams();
   const [submission, setSubmission] = useState(null);
   const [error, setError] = useState("");
@@ -1778,9 +1895,10 @@ function SubmissionDetail() {
             <div className="submission-code-heading"><h2>Submitted code</h2><span>Saved with this submission</span></div>
             <Suspense fallback={<div className="submission-code-loading">Loading code editor…</div>}>
               <Editor
+                beforeMount={definePokkieEditorTheme}
                 height="480px"
                 language={submission.language === "cpp" ? "cpp" : submission.language}
-                theme="vs-dark"
+                theme={theme === "dark" ? "vs-dark" : theme === "pokkie" ? "pokkie" : "vs"}
                 value={submission.code || ""}
                 options={{ readOnly: true, domReadOnly: true, minimap: { enabled: false }, scrollBeyondLastLine: false, automaticLayout: true, fontSize: 14, fontFamily: "JetBrains Mono, Consolas, monospace", padding: { top: 18 } }}
               />
@@ -1793,7 +1911,9 @@ function SubmissionDetail() {
 }
 export default function App() {
   return (
-    <AuthProvider>
+    <ThemeProvider>
+      <PetalOverlay />
+      <AuthProvider>
       <Routes>
         <Route path="/login" element={<AuthPage mode="login" />} />
         <Route path="/signup" element={<AuthPage mode="signup" />} />
@@ -1869,6 +1989,7 @@ export default function App() {
         />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-    </AuthProvider>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
