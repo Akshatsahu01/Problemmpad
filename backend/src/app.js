@@ -25,11 +25,6 @@ const geminiApiKey=()=>process.env.GEMINI_API_KEY||process.env.GOOGLE_API_KEY;
 const sendGeminiError=(error,res,next)=>{if(!geminiErrorStatus(error))return next(error);console.error('Gemini request failed:',error.message);const response=geminiErrorResponse(error);return res.status(response.status).json({error:response.error});};
 const compilerApiUrl=()=>process.env.ONLINECOMPILER_API_URL||process.env.JUDGE0_API_URL||'https://api.onlinecompiler.io/api/judge0';
 const compilerApiKey=()=>process.env.ONLINECOMPILER_API_KEY||process.env.JUDGE0_API_KEY;
-const sendGeminiError=(error,res,next,manualOption)=>{
-  const failure=geminiErrorResponse(error,manualOption);
-  if(failure)return res.status(failure.status).json({error:failure.message});
-  next(error);
-};
 const tokenFor=(user)=>jwt.sign({sub:user.id},tokenSecret(),{expiresIn:'7d'});
 const auth=async(req,res,next)=>{try{const token=(req.headers.authorization||'').replace(/^Bearer\s+/i,'');const payload=jwt.verify(token,tokenSecret());req.user=await User.findById(payload.sub);if(!req.user)return res.status(401).json({error:'Authentication required'});next();}catch{return res.status(401).json({error:'Authentication required'});}};
 const validate=(schema,source='body')=>(req,res,next)=>{const result=schema.safeParse(req[source]);if(!result.success)return res.status(400).json({error:'Invalid request',details:result.error.issues.map(x=>({path:x.path,message:x.message}))});req[source]=result.data;next();};
