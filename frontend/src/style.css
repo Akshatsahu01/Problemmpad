@@ -22,3 +22,5 @@
 .execution-error{margin-top:8px}
 .execution-error pre{color:#f19a9d;border-color:#573038}
 @media(max-width:560px){.output-comparison{grid-template-columns:1fr}}
+
+.workspace-submissions{display:grid}.workspace-submission{display:grid;grid-template-columns:100px 1fr auto;align-items:center;gap:12px;min-height:38px;border-bottom:1px solid var(--line);font-size:11px;color:#a9b5c0}.workspace-submission:last-child{border-bottom:0}.workspace-submission time{font:10px 'DM Mono';color:#82909d}@media(max-width:720px){.workspace-submission{grid-template-columns:75px 1fr auto;gap:7px;font-size:10px}.workspace-submission time{font-size:9px}}

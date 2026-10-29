@@ -979,6 +979,7 @@ function Workspace() {
     [language, setLanguage] = useState("python"),
     [code, setCode] = useState(starters.python),
     [tests, setTests] = useState([]),
+    [submissions, setSubmissions] = useState([]),
     [result, setResult] = useState(null),
     [busy, setBusy] = useState(false),
     [generating, setGenerating] = useState(false),
@@ -1014,6 +1015,21 @@ function Workspace() {
       .catch(() => setDraftReady(true));
   }, [id, language, problem]);
   useEffect(() => {
+    if (!problem) return;
+    let canceled = false;
+    api
+      .get(`/problems/${id}/submissions`)
+      .then((r) => {
+        if (!canceled) setSubmissions(r.data.items || []);
+      })
+      .catch(() => {
+        if (!canceled) setSubmissions([]);
+      });
+    return () => {
+      canceled = true;
+    };
+  }, [id, problem]);
+  useEffect(() => {
     if (!draftReady || !problem) return;
     const timer = setTimeout(
       () =>
@@ -1033,6 +1049,12 @@ function Workspace() {
         { code, language },
       );
       setResult(data);
+      if (submit && data.submission) {
+        setSubmissions((current) => [
+          data.submission,
+          ...current.filter((item) => item._id !== data.submission._id),
+        ]);
+      }
     } catch (e) {
       setError(e.response?.data?.error || "Execution failed");
     } finally {
@@ -1447,9 +1469,23 @@ function Workspace() {
                   </span>
                 ))}
               {tab === "submissions" && (
-                <span className="muted">
-                  Your saved submissions will appear here after you submit.
-                </span>
+                submissions.length ? (
+                  <div className="workspace-submissions">
+                    {submissions.map((submission) => (
+                      <div className="workspace-submission" key={submission._id}>
+                        <span className={`status-tag ${submission.status === "Accepted" ? "tag-green" : "tag-red"}`}>
+                          {submission.status}
+                        </span>
+                        <span>{submission.language}</span>
+                        <time>{new Date(submission.createdAt).toLocaleString()}</time>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <span className="muted">
+                    Your saved submissions will appear here after you submit.
+                  </span>
+                )
               )}
             </div>
           </div>
