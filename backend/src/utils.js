@@ -25,7 +25,7 @@ export function selectExecutionCases(tests, submit, testIds) {
 function generatedInputLayout(problem = {}) {
   const sample = problem.tests?.find((testCase) =>
     testCase.source !== 'ai' && testCase.visibility === 'sample' && typeof testCase.input === 'string' && testCase.input.trim()
-  )?.input.trim();
+  )?.input.trim().replace(/\r\n?/g, '\n');
   if (sample) {
     if (sample.startsWith('{')) return 'json-object';
     if (/^\[[^\]\n]*\]\s+\S+$/.test(sample)) return 'bracket-inline';
@@ -35,6 +35,7 @@ function generatedInputLayout(problem = {}) {
     if (lines.length === 2 && lines[0].split(/\s+/).length > 1 && /^\S+$/.test(lines[1])) return 'array-lines';
     return 'other-sample';
   }
+  if (/\bjson\b|\bobject\b/i.test(problem.inputFormat || '')) return 'json-object';
   const description = `${problem.inputFormat || ''} ${problem.statement || ''}`;
   return /\barray\b/i.test(description) && /\btarget\b/i.test(description) ? 'bracket-inline' : null;
 }
@@ -45,10 +46,9 @@ function arrayAndTarget(value) {
     try { object = JSON.parse(value); } catch { return null; }
   }
   if (!object || typeof object !== 'object' || Array.isArray(object)) return null;
-  const entries = Object.entries(object);
-  const arrays = entries.filter(([, item]) => Array.isArray(item));
+  const arrays = Object.entries(object).filter(([, item]) => Array.isArray(item));
   if (arrays.length !== 1 || !arrays[0][1].every((item) => typeof item === 'number' || typeof item === 'string')) return null;
-  const scalars = entries.filter(([, item]) => typeof item === 'number' || typeof item === 'string');
+  const scalars = Object.entries(object).filter(([, item]) => typeof item === 'number' || typeof item === 'string');
   const target = scalars.find(([key]) => /^(target|key|search|value|x|k)$/i.test(key)) || (scalars.length === 1 ? scalars[0] : null);
   return target ? { array: arrays[0][1], target: String(target[1]) } : null;
 }
@@ -58,7 +58,7 @@ export function normalizeGeneratedInput(value, problem = {}) {
   if (typeof input !== 'string') return null;
   const layout = generatedInputLayout(problem);
   if (!layout || layout === 'json-object') return input;
-  const trimmed = input.trim();
+  const trimmed = input.trim().replace(/\r\n?/g, '\n');
   const parts = arrayAndTarget(value);
   if (parts) {
     const bracket = JSON.stringify(parts.array);
@@ -80,13 +80,14 @@ export function normalizeGeneratedInput(value, problem = {}) {
 }
 
 export function buildTestGenerationPrompt(problem) {
-  const sampleInputs = problem.tests?.filter((testCase) => testCase.source !== 'ai' && testCase.visibility === 'sample').slice(0, 2).map((testCase) => ({ input: testCase.input, expectedOutput: testCase.expectedOutput })) || [];
-  const formatRule = sampleInputs.length
-    ? `Match the exact stdin layout of these handwritten sample cases (line count, separators, and array notation): ${JSON.stringify(sampleInputs)}.`
+  const samples = problem.tests?.filter((testCase) => testCase.source !== 'ai' && testCase.visibility === 'sample').slice(0, 2).map((testCase) => ({ input: testCase.input, expectedOutput: testCase.expectedOutput })) || [];
+  const existingInputs = problem.tests?.filter((testCase) => testCase.source === 'ai').slice(-12).map((testCase) => testCase.input.slice(0, 300)) || [];
+  const formatRule = samples.length
+    ? `Match the exact raw stdin layout of these handwritten sample cases (line count, separators, and array notation): ${JSON.stringify(samples)}.`
     : generatedInputLayout(problem) === 'bracket-inline'
-      ? 'No sample case is available. For an array and target, write input as a bracketed array followed by a space and the target, for example: [1,2,3,4,5] 3.'
-      : 'Follow the stated input format exactly. The input field must be the exact raw stdin text.';
-  return `Create up to 8 candidate test cases for this DSA problem. Return a JSON array of objects with input, expectedOutput, and description strings. The input string is raw stdin for the solution, not a JSON object describing variables. Do not use keys such as arr, nums, or target inside input unless the sample stdin itself is a JSON object. ${formatRule} ExpectedOutput must be exact stdout text. Candidate expected outputs are unverified and must be reviewed. Problem: ${JSON.stringify({ title: problem.title, statement: problem.statement, inputFormat: problem.inputFormat, outputFormat: problem.outputFormat, constraints: problem.constraints, signature: problem.signature, language: problem.language })}`;
+      ? 'For an array and target, use a bracketed array, one space, then the target. Example input: [1,2,3,4,5] 3.'
+      : 'Follow the stated input format exactly. Input must be the raw stdin text used by a solution.';
+  return `Create up to 8 candidate test cases for this DSA problem. Return a JSON array of objects with input, expectedOutput, and description strings. The input field is raw stdin, not a JSON object describing variables. Do not write keys such as array, arr, nums, or target inside input unless the sample stdin itself uses a JSON object. ${formatRule} Avoid repeating these existing inputs: ${JSON.stringify(existingInputs)}. ExpectedOutput is the exact stdout text; candidates are unverified and must be reviewed. Problem: ${JSON.stringify({ title: problem.title, statement: problem.statement, inputFormat: problem.inputFormat, outputFormat: problem.outputFormat, constraints: problem.constraints, signature: problem.signature, language: problem.language })}`;
 }
 
 export function normalizeGeneratedTests(candidates, problem = {}) {
