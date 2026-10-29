@@ -22,11 +22,78 @@ export function selectExecutionCases(tests, submit, testIds) {
   );
 }
 
-export function normalizeGeneratedTests(candidates) {
+function generatedInputLayout(problem = {}) {
+  const sample = problem.tests?.find((testCase) =>
+    testCase.source !== 'ai' && testCase.visibility === 'sample' && typeof testCase.input === 'string' && testCase.input.trim()
+  )?.input.trim();
+  if (sample) {
+    if (sample.startsWith('{')) return 'json-object';
+    if (/^\[[^\]\n]*\]\s+\S+$/.test(sample)) return 'bracket-inline';
+    if (/^\[[^\]\n]*\]\s*\n\s*\S+$/.test(sample)) return 'bracket-lines';
+    const lines = sample.split('\n').map((line) => line.trim());
+    if (lines.length === 3 && /^\d+$/.test(lines[0]) && lines[1].split(/\s+/).length === Number(lines[0]) && /^\S+$/.test(lines[2])) return 'count-lines';
+    if (lines.length === 2 && lines[0].split(/\s+/).length > 1 && /^\S+$/.test(lines[1])) return 'array-lines';
+    return 'other-sample';
+  }
+  const description = `${problem.inputFormat || ''} ${problem.statement || ''}`;
+  return /\barray\b/i.test(description) && /\btarget\b/i.test(description) ? 'bracket-inline' : null;
+}
+
+function arrayAndTarget(value) {
+  let object = value;
+  if (typeof value === 'string' && value.trim().startsWith('{')) {
+    try { object = JSON.parse(value); } catch { return null; }
+  }
+  if (!object || typeof object !== 'object' || Array.isArray(object)) return null;
+  const entries = Object.entries(object);
+  const arrays = entries.filter(([, item]) => Array.isArray(item));
+  if (arrays.length !== 1 || !arrays[0][1].every((item) => typeof item === 'number' || typeof item === 'string')) return null;
+  const scalars = entries.filter(([, item]) => typeof item === 'number' || typeof item === 'string');
+  const target = scalars.find(([key]) => /^(target|key|search|value|x|k)$/i.test(key)) || (scalars.length === 1 ? scalars[0] : null);
+  return target ? { array: arrays[0][1], target: String(target[1]) } : null;
+}
+
+export function normalizeGeneratedInput(value, problem = {}) {
+  const input = typeof value === 'string' ? value : JSON.stringify(value);
+  if (typeof input !== 'string') return null;
+  const layout = generatedInputLayout(problem);
+  if (!layout || layout === 'json-object') return input;
+  const trimmed = input.trim();
+  const parts = arrayAndTarget(value);
+  if (parts) {
+    const bracket = JSON.stringify(parts.array);
+    const values = parts.array.join(' ');
+    if (layout === 'bracket-inline') return `${bracket} ${parts.target}`;
+    if (layout === 'bracket-lines') return `${bracket}\n${parts.target}`;
+    if (layout === 'count-lines') return `${parts.array.length}\n${values}\n${parts.target}`;
+    if (layout === 'array-lines') return `${values}\n${parts.target}`;
+  }
+  if (trimmed.startsWith('{')) return null;
+  if (layout === 'bracket-inline') return /^\[[^\]\n]*\]\s+\S+$/.test(trimmed) ? trimmed : null;
+  if (layout === 'bracket-lines') return /^\[[^\]\n]*\]\s*\n\s*\S+$/.test(trimmed) ? trimmed : null;
+  if (layout === 'count-lines') {
+    const lines = trimmed.split('\n').map((line) => line.trim());
+    return lines.length === 3 && /^\d+$/.test(lines[0]) && lines[1].split(/\s+/).length === Number(lines[0]) && /^\S+$/.test(lines[2]) ? trimmed : null;
+  }
+  if (layout === 'array-lines') return /^\S+(?:\s+\S+)+\n\s*\S+$/.test(trimmed) ? trimmed : null;
+  return input;
+}
+
+export function buildTestGenerationPrompt(problem) {
+  const sampleInputs = problem.tests?.filter((testCase) => testCase.source !== 'ai' && testCase.visibility === 'sample').slice(0, 2).map((testCase) => ({ input: testCase.input, expectedOutput: testCase.expectedOutput })) || [];
+  const formatRule = sampleInputs.length
+    ? `Match the exact stdin layout of these handwritten sample cases (line count, separators, and array notation): ${JSON.stringify(sampleInputs)}.`
+    : generatedInputLayout(problem) === 'bracket-inline'
+      ? 'No sample case is available. For an array and target, write input as a bracketed array followed by a space and the target, for example: [1,2,3,4,5] 3.'
+      : 'Follow the stated input format exactly. The input field must be the exact raw stdin text.';
+  return `Create up to 8 candidate test cases for this DSA problem. Return a JSON array of objects with input, expectedOutput, and description strings. The input string is raw stdin for the solution, not a JSON object describing variables. Do not use keys such as arr, nums, or target inside input unless the sample stdin itself is a JSON object. ${formatRule} ExpectedOutput must be exact stdout text. Candidate expected outputs are unverified and must be reviewed. Problem: ${JSON.stringify({ title: problem.title, statement: problem.statement, inputFormat: problem.inputFormat, outputFormat: problem.outputFormat, constraints: problem.constraints, signature: problem.signature, language: problem.language })}`;
+}
+
+export function normalizeGeneratedTests(candidates, problem = {}) {
   if (candidates && !Array.isArray(candidates) && typeof candidates === 'object') {
     candidates = candidates.testCases ?? candidates.test_cases ?? candidates.tests ?? candidates.cases;
   }
-  if (!Array.isArray(candidates) || candidates.length > 8) return null;
+  if (!Array.isArray(candidates) || !candidates.length || candidates.length > 8) return null;
   const toText = (value) =>
     typeof value === 'string' ? value : JSON.stringify(value);
   const normalized = candidates.map((candidate) => {
@@ -34,7 +101,7 @@ export function normalizeGeneratedTests(candidates) {
     const rawInput = candidate.input ?? candidate.stdin;
     const rawOutput = candidate.expectedOutput ?? candidate.expected_output ?? candidate.expected ?? candidate.output ?? candidate.stdout;
     if (rawInput === undefined || rawOutput === undefined) return null;
-    const input = toText(rawInput);
+    const input = normalizeGeneratedInput(rawInput, problem);
     const expectedOutput = toText(rawOutput);
     if (typeof input !== 'string' || typeof expectedOutput !== 'string' || input.length > 50000 || expectedOutput.length > 50000) return null;
     return {
