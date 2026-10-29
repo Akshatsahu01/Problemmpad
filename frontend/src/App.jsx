@@ -732,6 +732,17 @@ function ProblemLibrary() {
     </div>
   );
 }
+const normalizeDifficulty = (value, fallback = "Medium") => {
+  if (typeof value === "string") {
+    const normalized = value.trim().toLowerCase();
+    if (["normal", "moderate", "intermediate"].includes(normalized)) return "Medium";
+    const match = ["Easy", "Medium", "Hard", "Custom"].find(
+      (difficulty) => difficulty.toLowerCase() === normalized,
+    );
+    if (match) return match;
+  }
+  return ["Easy", "Medium", "Hard", "Custom"].includes(fallback) ? fallback : "Medium";
+};
 function ProblemForm() {
   const nav = useNavigate();
   const [form, setForm] = useState({
@@ -769,6 +780,7 @@ function ProblemForm() {
     try {
       const { data } = await api.post("/problems", {
         ...form,
+        difficulty: normalizeDifficulty(form.difficulty),
         topics: form.topics
           .split(",")
           .map((s) => s.trim())
@@ -792,18 +804,19 @@ function ProblemForm() {
       const { data } = await api.post("/ai/parse-problem", {
         text: form.statement,
       });
-      setForm({
-        ...form,
+      setForm((current) => ({
+        ...current,
         ...data.problem,
-        title: asText(data.problem.title ?? form.title),
-        statement: asText(data.problem.statement ?? form.statement),
-        inputFormat: asText(data.problem.inputFormat ?? form.inputFormat),
-        outputFormat: asText(data.problem.outputFormat ?? form.outputFormat),
-        constraints: asText(data.problem.constraints ?? form.constraints),
+        difficulty: normalizeDifficulty(data.problem.difficulty, current.difficulty),
+        title: asText(data.problem.title ?? current.title),
+        statement: asText(data.problem.statement ?? current.statement),
+        inputFormat: asText(data.problem.inputFormat ?? current.inputFormat),
+        outputFormat: asText(data.problem.outputFormat ?? current.outputFormat),
+        constraints: asText(data.problem.constraints ?? current.constraints),
         topics: Array.isArray(data.problem.topics)
           ? data.problem.topics.join(", ")
-          : form.topics,
-      });
+          : current.topics,
+      }));
     } catch (e) {
       setErr(e.response?.data?.error || "AI parsing failed");
     } finally {
@@ -839,11 +852,11 @@ function ProblemForm() {
             <label>
               Difficulty
               <select
-                value={form.difficulty}
+                value={normalizeDifficulty(form.difficulty)}
                 onChange={(e) => patch("difficulty", e.target.value)}
               >
                 {["Easy", "Medium", "Hard", "Custom"].map((x) => (
-                  <option key={x}>{x}</option>
+                  <option key={x} value={x}>{x}</option>
                 ))}
               </select>
             </label>
@@ -940,8 +953,8 @@ function ProblemForm() {
           </div>
           <div className="preview-body">
             <h2>{form.title || "Problem title"}</h2>
-            <span className={`difficulty ${form.difficulty.toLowerCase()}`}>
-              {form.difficulty}
+            <span className={`difficulty ${normalizeDifficulty(form.difficulty).toLowerCase()}`}>
+              {normalizeDifficulty(form.difficulty)}
             </span>
             <div className="markdown">
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
