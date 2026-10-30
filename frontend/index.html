@@ -7,10 +7,11 @@
     <script>
       try {
         const savedTheme = localStorage.getItem('problempad-theme');
-        const theme = ['light', 'dark', 'pokkie'].includes(savedTheme) ? savedTheme : 'dark';
+        const currentTheme = savedTheme === 'pokkie' ? 'pookie' : savedTheme;
+        const theme = ['light', 'dark', 'pookie'].includes(currentTheme) ? currentTheme : 'dark';
         document.documentElement.dataset.theme = theme;
         document.documentElement.style.colorScheme = theme === 'dark' ? 'dark' : 'light';
-        document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#0c1118' : theme === 'pokkie' ? '#fff0f5' : '#f5f7fb';
+        document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#0c1118' : theme === 'pookie' ? '#fff0f5' : '#f5f7fb';
       } catch {}
     </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

@@ -16,7 +16,7 @@ import {
   useLocation,
 } from "react-router-dom";
 const Editor = React.lazy(() => import("@monaco-editor/react"));
-const definePokkieEditorTheme = (monaco) => monaco.editor.defineTheme("pokkie", {
+const definePookieEditorTheme = (monaco) => monaco.editor.defineTheme("pookie", {
   base: "vs",
   inherit: true,
   rules: [
@@ -83,14 +83,14 @@ const ThemeContext = createContext(null);
 const useTheme = () => useContext(ThemeContext);
 function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(() =>
-    ["light", "dark", "pokkie"].includes(document.documentElement.dataset.theme)
+    ["light", "dark", "pookie"].includes(document.documentElement.dataset.theme)
       ? document.documentElement.dataset.theme
       : "dark",
   );
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     document.documentElement.style.colorScheme = theme === "dark" ? "dark" : "light";
-    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "dark" ? "#0c1118" : theme === "pokkie" ? "#fff0f5" : "#f5f7fb");
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "dark" ? "#0c1118" : theme === "pookie" ? "#fff0f5" : "#f5f7fb");
     try { localStorage.setItem("problempad-theme", theme); } catch { /* Theme still works for this visit. */ }
   }, [theme]);
   return (
@@ -102,7 +102,7 @@ function ThemeProvider({ children }) {
 const themeOptions = [
   { id: "light", label: "Light Mode", Icon: Sun },
   { id: "dark", label: "Dark Mode", Icon: Moon },
-  { id: "pokkie", label: "Pokkie Mode", Icon: Flower2 },
+  { id: "pookie", label: "Pookie Mode", Icon: Flower2 },
 ];
 function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
@@ -156,7 +156,7 @@ function ThemeSwitcher() {
       {open && (
         <div className="theme-menu" role="menu" aria-label="Choose theme">
           {themeOptions.map(({ id, label, Icon }, index) => (
-            <button key={id} ref={(element) => { optionRefs.current[index] = element; }} className={`theme-option ${id === "pokkie" ? "theme-option-pokkie" : ""}`} type="button" role="menuitemradio" aria-checked={theme === id} onKeyDown={(event) => moveFocus(event, index)} onClick={() => { setTheme(id); setOpen(false); rootRef.current?.querySelector(".theme-switcher-trigger")?.focus(); }}>
+            <button key={id} ref={(element) => { optionRefs.current[index] = element; }} className={`theme-option ${id === "pookie" ? "theme-option-pookie" : ""}`} type="button" role="menuitemradio" aria-checked={theme === id} onKeyDown={(event) => moveFocus(event, index)} onClick={() => { setTheme(id); setOpen(false); rootRef.current?.querySelector(".theme-switcher-trigger")?.focus(); }}>
               <Icon size={17} aria-hidden="true" />
               <span>{label}</span>
               {theme === id && <Check size={15} aria-hidden="true" />}
@@ -169,7 +169,7 @@ function ThemeSwitcher() {
 }
 function PetalOverlay() {
   const { theme } = useTheme();
-  if (theme !== "pokkie") return null;
+  if (theme !== "pookie") return null;
   return <div className="petal-overlay" aria-hidden="true">{Array.from({ length: 8 }, (_, index) => <span className="petal" key={index} />)}</div>;
 }
 const asText = (value) => {
@@ -1511,10 +1511,10 @@ function Workspace() {
           <div className="monaco-wrap">
             <Suspense fallback={<div className="muted">Loading editor?</div>}>
               <Editor
-                beforeMount={definePokkieEditorTheme}
+                beforeMount={definePookieEditorTheme}
                 height="100%"
                 language={language === "cpp" ? "cpp" : language}
-                theme={theme === "dark" ? "vs-dark" : theme === "pokkie" ? "pokkie" : "vs"}
+                theme={theme === "dark" ? "vs-dark" : theme === "pookie" ? "pookie" : "vs"}
                 value={code}
                 onChange={(v) => setCode(v || "")}
                 options={{
@@ -1895,10 +1895,10 @@ function SubmissionDetail() {
             <div className="submission-code-heading"><h2>Submitted code</h2><span>Saved with this submission</span></div>
             <Suspense fallback={<div className="submission-code-loading">Loading code editor…</div>}>
               <Editor
-                beforeMount={definePokkieEditorTheme}
+                beforeMount={definePookieEditorTheme}
                 height="480px"
                 language={submission.language === "cpp" ? "cpp" : submission.language}
-                theme={theme === "dark" ? "vs-dark" : theme === "pokkie" ? "pokkie" : "vs"}
+                theme={theme === "dark" ? "vs-dark" : theme === "pookie" ? "pookie" : "vs"}
                 value={submission.code || ""}
                 options={{ readOnly: true, domReadOnly: true, minimap: { enabled: false }, scrollBeyondLastLine: false, automaticLayout: true, fontSize: 14, fontFamily: "JetBrains Mono, Consolas, monospace", padding: { top: 18 } }}
               />

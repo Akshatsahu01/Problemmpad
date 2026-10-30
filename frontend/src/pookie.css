@@ -1,0 +1,270 @@
+/* Pookie uses the readable light layout, with its own rose-colored tokens. */
+html[data-theme="pookie"]{
+  color-scheme:light;
+  --bg:#fff0f5;
+  --panel:#fff8fb;
+  --panel2:#ffe8f0;
+  --line:#efcbd9;
+  --muted:#79556a;
+  --text:#7d3c58;
+  --blue:#a12d62;
+  --green:#286d52;
+  --purple:#8d4c85;
+  background:var(--bg);
+  color:var(--text);
+}
+html[data-theme="pookie"] body{background:radial-gradient(circle at 85% 5%,#ffd1dc80,transparent 32%),var(--bg);color:var(--text)}
+html[data-theme="pookie"] .sidebar,
+html[data-theme="pookie"] .topbar{background:#fff8fb;border-color:var(--line)}
+html[data-theme="pookie"] .brand,
+html[data-theme="pookie"] .breadcrumbs strong,
+html[data-theme="pookie"] .page-heading h1,
+html[data-theme="pookie"] .panel-header h2,
+html[data-theme="pookie"] .stat-card strong,
+html[data-theme="pookie"] .collection-card h3,
+html[data-theme="pookie"] .empty-state h3,
+html[data-theme="pookie"] .problem-title-head h1,
+html[data-theme="pookie"] .problem-scroll h3,
+html[data-theme="pookie"] .submission-code-heading h2{color:#71344f}
+html[data-theme="pookie"] .brand-mark{background:linear-gradient(135deg,#ffb6c1,#ff69b4);color:#712949;box-shadow:0 5px 15px #ff69b449}
+html[data-theme="pookie"] .brand-dot,
+html[data-theme="pookie"] .heading-period,
+html[data-theme="pookie"] .practice-symbol{color:#c83c7e}
+html[data-theme="pookie"] .side-label,
+html[data-theme="pookie"] .eyebrow,
+html[data-theme="pookie"] .breadcrumbs,
+html[data-theme="pookie"] .top-actions,
+html[data-theme="pookie"] .page-heading p,
+html[data-theme="pookie"] .panel-header p,
+html[data-theme="pookie"] .stat-title,
+html[data-theme="pookie"] .stat-card small,
+html[data-theme="pookie"] .problem-name small,
+html[data-theme="pookie"] .problem-date,
+html[data-theme="pookie"] .collection-row small,
+html[data-theme="pookie"] .collection-card p,
+html[data-theme="pookie"] .collection-card-foot,
+html[data-theme="pookie"] .empty-state p,
+html[data-theme="pookie"] .list-footnote,
+html[data-theme="pookie"] .form-sub,
+html[data-theme="pookie"] .auth-switch,
+html[data-theme="pookie"] .auth-secure{color:#79556a}
+html[data-theme="pookie"] .nav-item{color:#79556a}
+html[data-theme="pookie"] .nav-item:hover,
+html[data-theme="pookie"] .nav-item.active{background:#ffe5ef;color:#8d2052}
+html[data-theme="pookie"] .nav-item.active{box-shadow:inset 2px 0 #ff69b4}
+html[data-theme="pookie"] .nav-shortcut,
+html[data-theme="pookie"] .profile-row>svg{color:#79556a}
+html[data-theme="pookie"] .vault-card,
+html[data-theme="pookie"] .input-search{background:#fff5f9;border-color:var(--line)}
+html[data-theme="pookie"] .avatar,
+html[data-theme="pookie"] .user-avatar{background:#ffd1dc;color:#71344f}
+html[data-theme="pookie"] .search-pill,
+html[data-theme="pookie"] .search-pill kbd,
+html[data-theme="pookie"] .input-search kbd{border-color:#e7bccd;color:#79556a}
+html[data-theme="pookie"] .input-search,
+html[data-theme="pookie"] .input-search input{color:#71344f}
+
+/* Cards and rows receive a gentle blossom-tinted surface. */
+html[data-theme="pookie"] .panel,
+html[data-theme="pookie"] .stat-card,
+html[data-theme="pookie"] .test-card,
+html[data-theme="pookie"] .code-preview{background:#fff8fb;border-color:var(--line);box-shadow:0 5px 18px #d8679820;border-radius:14px}
+html[data-theme="pookie"] .panel:hover,
+html[data-theme="pookie"] .stat-card:hover,
+html[data-theme="pookie"] .test-card:hover{box-shadow:0 8px 23px #d8679833}
+html[data-theme="pookie"] .practice-card{background:linear-gradient(125deg,#fff8fb,#ffdce9);border-color:#edbfd1;box-shadow:0 6px 20px #d8679826;border-radius:14px}
+html[data-theme="pookie"] .practice-glow{background:#ff69b433}
+html[data-theme="pookie"] .practice-copy h3{color:#71344f}
+html[data-theme="pookie"] .practice-copy p{color:#79556a}
+html[data-theme="pookie"] .stat-icon.blue,
+html[data-theme="pookie"] .stat-icon.purple,
+html[data-theme="pookie"] .collection-folder,
+html[data-theme="pookie"] .empty-icon{background:#ffe0ec;color:#a12d62}
+html[data-theme="pookie"] .stat-icon.orange{background:#ffecd8;color:#89520d}
+html[data-theme="pookie"] .stat-icon.green{background:#e3f5ec;color:#286d52}
+html[data-theme="pookie"] .problem-row,
+html[data-theme="pookie"] .submission-row,
+html[data-theme="pookie"] .collection-row,
+html[data-theme="pookie"] .submission-table-row,
+html[data-theme="pookie"] .workspace-submission,
+html[data-theme="pookie"] .table-header,
+html[data-theme="pookie"] .submission-table-head{border-color:#f0d5e0}
+html[data-theme="pookie"] .problem-name>a,
+html[data-theme="pookie"] .submission-title,
+html[data-theme="pookie"] .collection-row,
+html[data-theme="pookie"] .submission-table-row,
+html[data-theme="pookie"] .workspace-submission,
+html[data-theme="pookie"] .submission-problem-title{color:#71344f}
+html[data-theme="pookie"] .problem-name>a:hover,
+html[data-theme="pookie"] .submission-table-row>a:hover,
+html[data-theme="pookie"] .submission-table-row:hover .submission-problem-title,
+html[data-theme="pookie"] .text-link,
+html[data-theme="pookie"] .collection-open,
+html[data-theme="pookie"] .practice-link,
+html[data-theme="pookie"] .submission-detail-problem,
+html[data-theme="pookie"] .auth-switch a{color:#a12d62}
+html[data-theme="pookie"] .text-link:hover,
+html[data-theme="pookie"] .submission-detail-problem:hover{color:#7d2050}
+html[data-theme="pookie"] .row-open,
+html[data-theme="pookie"] .delete-small,
+html[data-theme="pookie"] .collection-row>svg{color:#79556a}
+html[data-theme="pookie"] .back-link{color:#79556a}
+html[data-theme="pookie"] .back-link:hover{color:#a12d62}
+html[data-theme="pookie"] .icon-btn:hover{background:#ffe8f0;color:#71344f}
+html[data-theme="pookie"] .skeleton-list{background:linear-gradient(90deg,#ffe6ef,#fff5f9,#ffe6ef);background-size:200% 100%}
+html[data-theme="pookie"] .submission-table-row:hover,
+html[data-theme="pookie"] .workspace-submission:hover{background:#ffeaf2}
+
+/* Inputs and buttons use deeper rose text for reliable contrast. */
+html[data-theme="pookie"] .create-form label,
+html[data-theme="pookie"] .auth-form label,
+html[data-theme="pookie"] .table-header,
+html[data-theme="pookie"] .submission-table-head{color:#79556a}
+html[data-theme="pookie"] .create-form input,
+html[data-theme="pookie"] .create-form textarea,
+html[data-theme="pookie"] .create-form select,
+html[data-theme="pookie"] .auth-form input{background:#fffafd;border-color:#e8bdce;color:#71344f;border-radius:9px}
+html[data-theme="pookie"] .create-form input::placeholder,
+html[data-theme="pookie"] .create-form textarea::placeholder,
+html[data-theme="pookie"] .auth-form input::placeholder{color:#866377}
+html[data-theme="pookie"] .create-form input:focus,
+html[data-theme="pookie"] .create-form textarea:focus,
+html[data-theme="pookie"] .create-form select:focus,
+html[data-theme="pookie"] .auth-form input:focus{border-color:#c83c7e;box-shadow:0 0 0 3px #ff69b43d}
+html[data-theme="pookie"] .primary-btn,
+html[data-theme="pookie"] .submit-btn{background:linear-gradient(120deg,#ffb6c1,#ffd1dc);border-color:#f0a7bf;color:#71344f;box-shadow:0 4px 13px #d8679833;border-radius:9px}
+html[data-theme="pookie"] .primary-btn:hover,
+html[data-theme="pookie"] .submit-btn:hover{background:linear-gradient(120deg,#ff9fbb,#ffc5d7);box-shadow:0 6px 18px #d8679855}
+html[data-theme="pookie"] .secondary-btn,
+html[data-theme="pookie"] .mini-btn,
+html[data-theme="pookie"] .run-btn,
+html[data-theme="pookie"] .reset-code-btn{background:#ffe8f0;border-color:#e8bdce;color:#71344f;border-radius:9px}
+html[data-theme="pookie"] .secondary-btn:hover,
+html[data-theme="pookie"] .mini-btn:hover,
+html[data-theme="pookie"] .run-btn:hover,
+html[data-theme="pookie"] .reset-code-btn:hover{background:#ffd1dc;box-shadow:0 0 0 2px #ff69b433}
+html[data-theme="pookie"] .ai-parse-btn{background:#ffe8f1;border-color:#e7b9cf;color:#883b6b}
+html[data-theme="pookie"] .ai-parse-btn:hover{background:#ffd9e8}
+html[data-theme="pookie"] .ai-parse-btn span{color:#79556a}
+html[data-theme="pookie"] .theme-switcher-trigger,
+html[data-theme="pookie"] .theme-menu{background:#fff8fb;border-color:#e8bdce;color:#71344f;box-shadow:0 8px 22px #d8679826}
+html[data-theme="pookie"] .theme-switcher-trigger:hover,
+html[data-theme="pookie"] .theme-option:hover,
+html[data-theme="pookie"] .theme-option[aria-checked="true"]{background:#ffe8f0}
+html[data-theme="pookie"] .theme-option{color:#71344f}
+html[data-theme="pookie"] .theme-option-pookie{color:#a12d62}
+html[data-theme="pookie"] .theme-option-pookie:hover,
+html[data-theme="pookie"] .theme-option-pookie[aria-checked="true"]{background:#ffd8e9}
+html[data-theme="pookie"] :is(button,input,select,textarea,a):focus-visible{outline:2px solid #b5316e;outline-offset:2px}
+
+/* Reading, test cases, results, and saved code. */
+html[data-theme="pookie"] .markdown,
+html[data-theme="pookie"] .markdown h1,
+html[data-theme="pookie"] .markdown h2,
+html[data-theme="pookie"] .markdown h3,
+html[data-theme="pookie"] .preview-body>h2,
+html[data-theme="pookie"] .preview-body h4{color:#71344f}
+html[data-theme="pookie"] .markdown code,
+html[data-theme="pookie"] .markdown pre,
+html[data-theme="pookie"] .constraint-box,
+html[data-theme="pookie"] .test-body pre,
+html[data-theme="pookie"] .output-comparison pre,
+html[data-theme="pookie"] .execution-error pre{background:#fff0f5;border-color:#efcbd9;color:#71344f}
+html[data-theme="pookie"] .test-card{color:#71344f}
+html[data-theme="pookie"] .topic-list span,
+html[data-theme="pookie"] .topic-chip,
+html[data-theme="pookie"] .difficulty.custom{background:#f9e0f0;color:#85416d}
+html[data-theme="pookie"] .problem-pane,
+html[data-theme="pookie"] .editor-pane{background:#fff8fb}
+html[data-theme="pookie"] .workspace-top,
+html[data-theme="pookie"] .problem-pane,
+html[data-theme="pookie"] .problem-title-head,
+html[data-theme="pookie"] .problem-tabs,
+html[data-theme="pookie"] .editor-toolbar,
+html[data-theme="pookie"] .results-drawer,
+html[data-theme="pookie"] .result-tabs,
+html[data-theme="pookie"] .editor-footer,
+html[data-theme="pookie"] .tests-panel,
+html[data-theme="pookie"] .test-body,
+html[data-theme="pookie"] .compact-case,
+html[data-theme="pookie"] .run-case,
+html[data-theme="pookie"] .submission-code-heading{border-color:#efcbd9}
+html[data-theme="pookie"] .autosave,
+html[data-theme="pookie"] .editor-saved,
+html[data-theme="pookie"] .icon-btn,
+html[data-theme="pookie"] .problem-scroll>p,
+html[data-theme="pookie"] .test-card summary,
+html[data-theme="pookie"] .test-type,
+html[data-theme="pookie"] .test-body small,
+html[data-theme="pookie"] .editor-footer,
+html[data-theme="pookie"] .muted,
+html[data-theme="pookie"] .compact-case,
+html[data-theme="pookie"] .running,
+html[data-theme="pookie"] .run-case{color:#79556a}
+html[data-theme="pookie"] .problem-tabs button,
+html[data-theme="pookie"] .result-tabs button{color:#79556a}
+html[data-theme="pookie"] .problem-tabs button.selected,
+html[data-theme="pookie"] .result-tabs button.active,
+html[data-theme="pookie"] .language-select,
+html[data-theme="pookie"] .language-select select{color:#a12d62}
+html[data-theme="pookie"] .problem-tabs button span,
+html[data-theme="pookie"] .result-tabs button span,
+html[data-theme="pookie"] .test-head h3 span{background:#ffe1eb;color:#79556a}
+html[data-theme="pookie"] .language-select option{background:#fff8fb;color:#71344f}
+html[data-theme="pookie"] .compact-case code,
+html[data-theme="pookie"] .run-case summary>small,
+html[data-theme="pookie"] .run-case summary>svg,
+html[data-theme="pookie"] .output-comparison label,
+html[data-theme="pookie"] .execution-error label,
+html[data-theme="pookie"] .submission-table-row>span:last-child,
+html[data-theme="pookie"] .workspace-submission time,
+html[data-theme="pookie"] .submission-detail-meta small,
+html[data-theme="pookie"] .submission-code-heading span{color:#79556a}
+
+/* Positive and error states retain recognizable meaning. */
+html[data-theme="pookie"] .error-banner{background:#fff0f2;border-color:#e5aab8;color:#912b44}
+html[data-theme="pookie"] .ai-generation-notice{background:#ecf8f1;border-color:#bddfc9;color:#286d52}
+html[data-theme="pookie"] .unverified{color:#82500c}
+html[data-theme="pookie"] .run-error,
+html[data-theme="pookie"] .run-summary.rejected strong,
+html[data-theme="pookie"] .run-case .fail-text,
+html[data-theme="pookie"] .run-case pre,
+html[data-theme="pookie"] .execution-error pre{color:#a3333d}
+
+/* Sign-in and registration screens. */
+html[data-theme="pookie"] .auth-page{background:#fff0f5}
+html[data-theme="pookie"] .auth-visual{background:radial-gradient(circle at 28% 34%,#ffd1dc 0,transparent 49%),linear-gradient(145deg,#fff8fb,#ffe5ee);border-color:#efcbd9}
+html[data-theme="pookie"] .visual-copy h1,
+html[data-theme="pookie"] .auth-form h2{color:#71344f}
+html[data-theme="pookie"] .visual-copy h1 em,
+html[data-theme="pookie"] .auth-form>.eyebrow{color:#a12d62}
+html[data-theme="pookie"] .mobile-brand{color:#71344f}
+html[data-theme="pookie"] .visual-copy>.eyebrow,
+html[data-theme="pookie"] .visual-copy>p,
+html[data-theme="pookie"] .auth-footer{color:#79556a}
+html[data-theme="pookie"] .code-head,
+html[data-theme="pookie"] .code-status{border-color:#efcbd9;color:#79556a}
+html[data-theme="pookie"] .code-preview pre{color:#71344f}
+html[data-theme="pookie"] .code-purple{color:#8d4c85}
+html[data-theme="pookie"] .code-blue{color:#a12d62}
+
+/* Deliberately few fixed, compositor-friendly petals; they never receive input. */
+.petal-overlay{position:fixed;inset:0;z-index:15;overflow:hidden;pointer-events:none;contain:layout paint}
+.petal{position:absolute;top:-24px;left:var(--left);width:var(--size);height:calc(var(--size)*.68);border-radius:80% 10% 80% 10%;background:linear-gradient(135deg,#ffd1dc,#ff91b8);box-shadow:0 0 5px #ff69b44d;opacity:.58;transform:translate3d(0,-30px,0) rotate(0deg);animation:petal-fall var(--duration) linear infinite;animation-delay:var(--delay);will-change:transform}
+.petal:nth-child(1){--left:6%;--size:10px;--duration:17s;--delay:-2s;--drift:45px;--rotation:280deg}
+.petal:nth-child(2){--left:19%;--size:14px;--duration:22s;--delay:-12s;--drift:-70px;--rotation:-320deg}
+.petal:nth-child(3){--left:34%;--size:9px;--duration:19s;--delay:-7s;--drift:60px;--rotation:300deg}
+.petal:nth-child(4){--left:49%;--size:13px;--duration:25s;--delay:-16s;--drift:-55px;--rotation:-240deg}
+.petal:nth-child(5){--left:62%;--size:11px;--duration:21s;--delay:-4s;--drift:75px;--rotation:340deg}
+.petal:nth-child(6){--left:76%;--size:15px;--duration:24s;--delay:-19s;--drift:-60px;--rotation:-300deg}
+.petal:nth-child(7){--left:87%;--size:9px;--duration:18s;--delay:-10s;--drift:50px;--rotation:250deg}
+.petal:nth-child(8){--left:96%;--size:12px;--duration:23s;--delay:-14s;--drift:-65px;--rotation:-310deg}
+@keyframes petal-fall{to{transform:translate3d(var(--drift),calc(100vh + 45px),0) rotate(var(--rotation))}}
+
+/* A small floral signature on headings, without cluttering controls. */
+html[data-theme="pookie"] :is(.page-heading h1,.panel-header h2,.problem-title-head h1)::after{content:" ✿";color:#d95091;font-size:.67em;vertical-align:middle}
+html[data-theme="pookie"] :is(.primary-btn,.submit-btn){position:relative}
+html[data-theme="pookie"] :is(.primary-btn,.submit-btn)::after{content:"♥";position:absolute;right:6px;top:-11px;color:#d95091;font-size:13px;opacity:0;transform:translateY(5px) rotate(-15deg);transition:opacity .22s ease,transform .22s ease;pointer-events:none}
+html[data-theme="pookie"] :is(.primary-btn,.submit-btn):hover::after{opacity:.8;transform:translateY(-2px) rotate(12deg)}
+@media(max-width:720px){html[data-theme="pookie"] .sidebar{background:#fff8fb;border-color:var(--line)}html[data-theme="pookie"] .nav-item.active{box-shadow:inset 0 2px #ff69b4}.petal:nth-child(n+6){display:none}}
+@media(prefers-reduced-motion:reduce){.petal-overlay{display:none}html[data-theme="pookie"] :is(.primary-btn,.submit-btn)::after{display:none}}

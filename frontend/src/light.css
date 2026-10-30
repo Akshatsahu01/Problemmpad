@@ -7,9 +7,9 @@
 .theme-menu{position:absolute;right:0;top:calc(100% + 7px);z-index:40;width:174px;padding:6px;border:1px solid var(--line);border-radius:12px;background:var(--panel);box-shadow:0 12px 32px #0003}
 .theme-option{display:flex;align-items:center;gap:9px;width:100%;min-height:36px;padding:0 9px;border:0;border-radius:7px;background:transparent;color:var(--text);font-size:11px;text-align:left}
 .theme-option span{flex:1}.theme-option:hover,.theme-option[aria-checked="true"]{background:var(--panel2)}
-.theme-option-pokkie{color:#b02867}.theme-option-pokkie:hover,.theme-option-pokkie[aria-checked="true"]{background:#ffe7f1;color:#8d2052}
-html[data-theme="dark"] .theme-option-pokkie{color:#ff9ac5}
-html[data-theme="dark"] .theme-option-pokkie:hover,html[data-theme="dark"] .theme-option-pokkie[aria-checked="true"]{background:#3b2536;color:#ffd0e5}
+.theme-option-pookie{color:#b02867}.theme-option-pookie:hover,.theme-option-pookie[aria-checked="true"]{background:#ffe7f1;color:#8d2052}
+html[data-theme="dark"] .theme-option-pookie{color:#ff9ac5}
+html[data-theme="dark"] .theme-option-pookie:hover,html[data-theme="dark"] .theme-option-pookie[aria-checked="true"]{background:#3b2536;color:#ffd0e5}
 .auth-form-wrap{position:relative}
 .auth-theme-toggle{position:absolute;right:24px;top:22px}
 :root{color-scheme:dark}
@@ -17,7 +17,7 @@ body,.sidebar,.topbar,.panel,.stat-card,.practice-card,.test-card,.editor-pane,.
 @media(max-width:720px){.theme-switcher-label{display:none}.theme-switcher-trigger{gap:5px}}
 @media(prefers-reduced-motion:reduce){.theme-chevron,body,.sidebar,.topbar,.panel,.stat-card,.practice-card,.test-card,.editor-pane,.problem-pane,.nav-item,.primary-btn,.secondary-btn,.run-btn,.submit-btn,.theme-switcher-trigger,.theme-option,.create-form input,.create-form textarea,.create-form select,.auth-form input{transition:none!important}}
 
-html:is([data-theme="light"],[data-theme="pokkie"]){
+html:is([data-theme="light"],[data-theme="pookie"]){
   color-scheme:light;
   --bg:#f5f7fb;
   --panel:#ffffff;
@@ -31,246 +31,246 @@ html:is([data-theme="light"],[data-theme="pokkie"]){
   color:var(--text);
   background:var(--bg);
 }
-html:is([data-theme="light"],[data-theme="pokkie"]) body{color:var(--text);background:var(--bg)}
+html:is([data-theme="light"],[data-theme="pookie"]) body{color:var(--text);background:var(--bg)}
 
 /* App frame and navigation. */
-html:is([data-theme="light"],[data-theme="pokkie"]) .sidebar,
-html:is([data-theme="light"],[data-theme="pokkie"]) .topbar{background:#fff;border-color:var(--line)}
-html:is([data-theme="light"],[data-theme="pokkie"]) .brand,
-html:is([data-theme="light"],[data-theme="pokkie"]) .breadcrumbs strong{color:#1c2b3a}
-html:is([data-theme="light"],[data-theme="pokkie"]) .brand-mark{background:#3974d2;color:#fff;box-shadow:0 4px 14px #3974d22b}
-html:is([data-theme="light"],[data-theme="pokkie"]) .brand-dot,
-html:is([data-theme="light"],[data-theme="pokkie"]) .heading-period{color:#285cae}
-html:is([data-theme="light"],[data-theme="pokkie"]) .side-label,
-html:is([data-theme="light"],[data-theme="pokkie"]) .eyebrow,
-html:is([data-theme="light"],[data-theme="pokkie"]) .breadcrumbs,
-html:is([data-theme="light"],[data-theme="pokkie"]) .top-actions{color:#536579}
-html:is([data-theme="light"],[data-theme="pokkie"]) .nav-item{color:#45586d}
-html:is([data-theme="light"],[data-theme="pokkie"]) .nav-item:hover,
-html:is([data-theme="light"],[data-theme="pokkie"]) .nav-item.active{background:#eaf1fb;color:#1f4f9b}
-html:is([data-theme="light"],[data-theme="pokkie"]) .nav-shortcut,
-html:is([data-theme="light"],[data-theme="pokkie"]) .profile-row>svg{color:#526579}
-html:is([data-theme="light"],[data-theme="pokkie"]) .vault-card{background:#f2f7fc;border-color:#d5e2ee}
-html:is([data-theme="light"],[data-theme="pokkie"]) .vault-icon{color:#176c4b}
-html:is([data-theme="light"],[data-theme="pokkie"]) .profile-row{border-color:var(--line)}
-html:is([data-theme="light"],[data-theme="pokkie"]) .avatar,
-html:is([data-theme="light"],[data-theme="pokkie"]) .user-avatar{background:#e9def8;color:#573a85}
-html:is([data-theme="light"],[data-theme="pokkie"]) .search-pill,
-html:is([data-theme="light"],[data-theme="pokkie"]) .search-pill kbd,
-html:is([data-theme="light"],[data-theme="pokkie"]) .input-search kbd{border-color:#cbd7e4;color:#526579}
+html:is([data-theme="light"],[data-theme="pookie"]) .sidebar,
+html:is([data-theme="light"],[data-theme="pookie"]) .topbar{background:#fff;border-color:var(--line)}
+html:is([data-theme="light"],[data-theme="pookie"]) .brand,
+html:is([data-theme="light"],[data-theme="pookie"]) .breadcrumbs strong{color:#1c2b3a}
+html:is([data-theme="light"],[data-theme="pookie"]) .brand-mark{background:#3974d2;color:#fff;box-shadow:0 4px 14px #3974d22b}
+html:is([data-theme="light"],[data-theme="pookie"]) .brand-dot,
+html:is([data-theme="light"],[data-theme="pookie"]) .heading-period{color:#285cae}
+html:is([data-theme="light"],[data-theme="pookie"]) .side-label,
+html:is([data-theme="light"],[data-theme="pookie"]) .eyebrow,
+html:is([data-theme="light"],[data-theme="pookie"]) .breadcrumbs,
+html:is([data-theme="light"],[data-theme="pookie"]) .top-actions{color:#536579}
+html:is([data-theme="light"],[data-theme="pookie"]) .nav-item{color:#45586d}
+html:is([data-theme="light"],[data-theme="pookie"]) .nav-item:hover,
+html:is([data-theme="light"],[data-theme="pookie"]) .nav-item.active{background:#eaf1fb;color:#1f4f9b}
+html:is([data-theme="light"],[data-theme="pookie"]) .nav-shortcut,
+html:is([data-theme="light"],[data-theme="pookie"]) .profile-row>svg{color:#526579}
+html:is([data-theme="light"],[data-theme="pookie"]) .vault-card{background:#f2f7fc;border-color:#d5e2ee}
+html:is([data-theme="light"],[data-theme="pookie"]) .vault-icon{color:#176c4b}
+html:is([data-theme="light"],[data-theme="pookie"]) .profile-row{border-color:var(--line)}
+html:is([data-theme="light"],[data-theme="pookie"]) .avatar,
+html:is([data-theme="light"],[data-theme="pookie"]) .user-avatar{background:#e9def8;color:#573a85}
+html:is([data-theme="light"],[data-theme="pookie"]) .search-pill,
+html:is([data-theme="light"],[data-theme="pookie"]) .search-pill kbd,
+html:is([data-theme="light"],[data-theme="pookie"]) .input-search kbd{border-color:#cbd7e4;color:#526579}
 
 /* Dashboard and shared cards. */
-html:is([data-theme="light"],[data-theme="pokkie"]) .page-heading h1,
-html:is([data-theme="light"],[data-theme="pokkie"]) .stat-card strong,
-html:is([data-theme="light"],[data-theme="pokkie"]) .panel-header h2,
-html:is([data-theme="light"],[data-theme="pokkie"]) .collection-card h3,
-html:is([data-theme="light"],[data-theme="pokkie"]) .empty-state h3{color:#1b2c3e}
-html:is([data-theme="light"],[data-theme="pokkie"]) .page-heading p,
-html:is([data-theme="light"],[data-theme="pokkie"]) .panel-header p,
-html:is([data-theme="light"],[data-theme="pokkie"]) .stat-title,
-html:is([data-theme="light"],[data-theme="pokkie"]) .stat-card small,
-html:is([data-theme="light"],[data-theme="pokkie"]) .problem-name small,
-html:is([data-theme="light"],[data-theme="pokkie"]) .problem-date,
-html:is([data-theme="light"],[data-theme="pokkie"]) .collection-row small,
-html:is([data-theme="light"],[data-theme="pokkie"]) .collection-card p,
-html:is([data-theme="light"],[data-theme="pokkie"]) .collection-card-foot,
-html:is([data-theme="light"],[data-theme="pokkie"]) .empty-state p,
-html:is([data-theme="light"],[data-theme="pokkie"]) .list-footnote{color:#536579}
-html:is([data-theme="light"],[data-theme="pokkie"]) .panel,
-html:is([data-theme="light"],[data-theme="pokkie"]) .stat-card{background:#fff;border-color:var(--line)}
-html:is([data-theme="light"],[data-theme="pokkie"]) .secondary-btn{background:#edf2f8;border-color:#cbd7e4;color:#274056}
-html:is([data-theme="light"],[data-theme="pokkie"]) .secondary-btn:hover{background:#e0e9f5}
-html:is([data-theme="light"],[data-theme="pokkie"]) .problem-row,
-html:is([data-theme="light"],[data-theme="pokkie"]) .submission-row,
-html:is([data-theme="light"],[data-theme="pokkie"]) .collection-row,
-html:is([data-theme="light"],[data-theme="pokkie"]) .submission-table-row,
-html:is([data-theme="light"],[data-theme="pokkie"]) .workspace-submission{border-color:var(--line)}
-html:is([data-theme="light"],[data-theme="pokkie"]) .problem-name>a,
-html:is([data-theme="light"],[data-theme="pokkie"]) .submission-title,
-html:is([data-theme="light"],[data-theme="pokkie"]) .collection-row,
-html:is([data-theme="light"],[data-theme="pokkie"]) .submission-table-row,
-html:is([data-theme="light"],[data-theme="pokkie"]) .workspace-submission,
-html:is([data-theme="light"],[data-theme="pokkie"]) .submission-problem-title{color:#24384e}
-html:is([data-theme="light"],[data-theme="pokkie"]) .problem-name>a:hover,
-html:is([data-theme="light"],[data-theme="pokkie"]) .submission-table-row>a:hover,
-html:is([data-theme="light"],[data-theme="pokkie"]) .submission-table-row:hover .submission-problem-title{color:#2058aa}
-html:is([data-theme="light"],[data-theme="pokkie"]) .text-link,
-html:is([data-theme="light"],[data-theme="pokkie"]) .collection-open,
-html:is([data-theme="light"],[data-theme="pokkie"]) .practice-link,
-html:is([data-theme="light"],[data-theme="pokkie"]) .submission-detail-problem,
-html:is([data-theme="light"],[data-theme="pokkie"]) .auth-switch a{color:#285cae}
-html:is([data-theme="light"],[data-theme="pokkie"]) .text-link:hover,
-html:is([data-theme="light"],[data-theme="pokkie"]) .submission-detail-problem:hover{color:#153f81}
-html:is([data-theme="light"],[data-theme="pokkie"]) .row-open,
-html:is([data-theme="light"],[data-theme="pokkie"]) .delete-small,
-html:is([data-theme="light"],[data-theme="pokkie"]) .collection-row>svg{color:#526579}
-html:is([data-theme="light"],[data-theme="pokkie"]) .row-open:hover,
-html:is([data-theme="light"],[data-theme="pokkie"]) .delete-small:hover{color:#1c2b3a}
-html:is([data-theme="light"],[data-theme="pokkie"]) .stat-icon.blue,
-html:is([data-theme="light"],[data-theme="pokkie"]) .empty-icon{background:#e8f0fd;color:#285cae}
-html:is([data-theme="light"],[data-theme="pokkie"]) .stat-icon.green,
-html:is([data-theme="light"],[data-theme="pokkie"]) .result-dot,
-html:is([data-theme="light"],[data-theme="pokkie"]) .tag-green,
-html:is([data-theme="light"],[data-theme="pokkie"]) .difficulty{background:#e3f5ec;color:#176c4b}
-html:is([data-theme="light"],[data-theme="pokkie"]) .stat-icon.orange,
-html:is([data-theme="light"],[data-theme="pokkie"]) .difficulty.medium{background:#fff0d8;color:#8b560d}
-html:is([data-theme="light"],[data-theme="pokkie"]) .stat-icon.purple,
-html:is([data-theme="light"],[data-theme="pokkie"]) .collection-folder,
-html:is([data-theme="light"],[data-theme="pokkie"]) .difficulty.custom{background:#eee9fa;color:#6546a2}
-html:is([data-theme="light"],[data-theme="pokkie"]) .result-dot.fail,
-html:is([data-theme="light"],[data-theme="pokkie"]) .tag-red,
-html:is([data-theme="light"],[data-theme="pokkie"]) .difficulty.hard{background:#fde7e8;color:#a3333d}
-html:is([data-theme="light"],[data-theme="pokkie"]) .practice-card{background:linear-gradient(120deg,#eaf1ff,#f3f5fc);border-color:#d5deef}
-html:is([data-theme="light"],[data-theme="pokkie"]) .practice-glow{background:#9d8ae533}
-html:is([data-theme="light"],[data-theme="pokkie"]) .practice-symbol{color:#6546a2}
-html:is([data-theme="light"],[data-theme="pokkie"]) .practice-copy h3{color:#21324c}
-html:is([data-theme="light"],[data-theme="pokkie"]) .practice-copy p{color:#536579}
-html:is([data-theme="light"],[data-theme="pokkie"]) .skeleton-list{background:linear-gradient(90deg,#e8edf4,#f4f7fb,#e8edf4);background-size:200% 100%}
+html:is([data-theme="light"],[data-theme="pookie"]) .page-heading h1,
+html:is([data-theme="light"],[data-theme="pookie"]) .stat-card strong,
+html:is([data-theme="light"],[data-theme="pookie"]) .panel-header h2,
+html:is([data-theme="light"],[data-theme="pookie"]) .collection-card h3,
+html:is([data-theme="light"],[data-theme="pookie"]) .empty-state h3{color:#1b2c3e}
+html:is([data-theme="light"],[data-theme="pookie"]) .page-heading p,
+html:is([data-theme="light"],[data-theme="pookie"]) .panel-header p,
+html:is([data-theme="light"],[data-theme="pookie"]) .stat-title,
+html:is([data-theme="light"],[data-theme="pookie"]) .stat-card small,
+html:is([data-theme="light"],[data-theme="pookie"]) .problem-name small,
+html:is([data-theme="light"],[data-theme="pookie"]) .problem-date,
+html:is([data-theme="light"],[data-theme="pookie"]) .collection-row small,
+html:is([data-theme="light"],[data-theme="pookie"]) .collection-card p,
+html:is([data-theme="light"],[data-theme="pookie"]) .collection-card-foot,
+html:is([data-theme="light"],[data-theme="pookie"]) .empty-state p,
+html:is([data-theme="light"],[data-theme="pookie"]) .list-footnote{color:#536579}
+html:is([data-theme="light"],[data-theme="pookie"]) .panel,
+html:is([data-theme="light"],[data-theme="pookie"]) .stat-card{background:#fff;border-color:var(--line)}
+html:is([data-theme="light"],[data-theme="pookie"]) .secondary-btn{background:#edf2f8;border-color:#cbd7e4;color:#274056}
+html:is([data-theme="light"],[data-theme="pookie"]) .secondary-btn:hover{background:#e0e9f5}
+html:is([data-theme="light"],[data-theme="pookie"]) .problem-row,
+html:is([data-theme="light"],[data-theme="pookie"]) .submission-row,
+html:is([data-theme="light"],[data-theme="pookie"]) .collection-row,
+html:is([data-theme="light"],[data-theme="pookie"]) .submission-table-row,
+html:is([data-theme="light"],[data-theme="pookie"]) .workspace-submission{border-color:var(--line)}
+html:is([data-theme="light"],[data-theme="pookie"]) .problem-name>a,
+html:is([data-theme="light"],[data-theme="pookie"]) .submission-title,
+html:is([data-theme="light"],[data-theme="pookie"]) .collection-row,
+html:is([data-theme="light"],[data-theme="pookie"]) .submission-table-row,
+html:is([data-theme="light"],[data-theme="pookie"]) .workspace-submission,
+html:is([data-theme="light"],[data-theme="pookie"]) .submission-problem-title{color:#24384e}
+html:is([data-theme="light"],[data-theme="pookie"]) .problem-name>a:hover,
+html:is([data-theme="light"],[data-theme="pookie"]) .submission-table-row>a:hover,
+html:is([data-theme="light"],[data-theme="pookie"]) .submission-table-row:hover .submission-problem-title{color:#2058aa}
+html:is([data-theme="light"],[data-theme="pookie"]) .text-link,
+html:is([data-theme="light"],[data-theme="pookie"]) .collection-open,
+html:is([data-theme="light"],[data-theme="pookie"]) .practice-link,
+html:is([data-theme="light"],[data-theme="pookie"]) .submission-detail-problem,
+html:is([data-theme="light"],[data-theme="pookie"]) .auth-switch a{color:#285cae}
+html:is([data-theme="light"],[data-theme="pookie"]) .text-link:hover,
+html:is([data-theme="light"],[data-theme="pookie"]) .submission-detail-problem:hover{color:#153f81}
+html:is([data-theme="light"],[data-theme="pookie"]) .row-open,
+html:is([data-theme="light"],[data-theme="pookie"]) .delete-small,
+html:is([data-theme="light"],[data-theme="pookie"]) .collection-row>svg{color:#526579}
+html:is([data-theme="light"],[data-theme="pookie"]) .row-open:hover,
+html:is([data-theme="light"],[data-theme="pookie"]) .delete-small:hover{color:#1c2b3a}
+html:is([data-theme="light"],[data-theme="pookie"]) .stat-icon.blue,
+html:is([data-theme="light"],[data-theme="pookie"]) .empty-icon{background:#e8f0fd;color:#285cae}
+html:is([data-theme="light"],[data-theme="pookie"]) .stat-icon.green,
+html:is([data-theme="light"],[data-theme="pookie"]) .result-dot,
+html:is([data-theme="light"],[data-theme="pookie"]) .tag-green,
+html:is([data-theme="light"],[data-theme="pookie"]) .difficulty{background:#e3f5ec;color:#176c4b}
+html:is([data-theme="light"],[data-theme="pookie"]) .stat-icon.orange,
+html:is([data-theme="light"],[data-theme="pookie"]) .difficulty.medium{background:#fff0d8;color:#8b560d}
+html:is([data-theme="light"],[data-theme="pookie"]) .stat-icon.purple,
+html:is([data-theme="light"],[data-theme="pookie"]) .collection-folder,
+html:is([data-theme="light"],[data-theme="pookie"]) .difficulty.custom{background:#eee9fa;color:#6546a2}
+html:is([data-theme="light"],[data-theme="pookie"]) .result-dot.fail,
+html:is([data-theme="light"],[data-theme="pookie"]) .tag-red,
+html:is([data-theme="light"],[data-theme="pookie"]) .difficulty.hard{background:#fde7e8;color:#a3333d}
+html:is([data-theme="light"],[data-theme="pookie"]) .practice-card{background:linear-gradient(120deg,#eaf1ff,#f3f5fc);border-color:#d5deef}
+html:is([data-theme="light"],[data-theme="pookie"]) .practice-glow{background:#9d8ae533}
+html:is([data-theme="light"],[data-theme="pookie"]) .practice-symbol{color:#6546a2}
+html:is([data-theme="light"],[data-theme="pookie"]) .practice-copy h3{color:#21324c}
+html:is([data-theme="light"],[data-theme="pookie"]) .practice-copy p{color:#536579}
+html:is([data-theme="light"],[data-theme="pookie"]) .skeleton-list{background:linear-gradient(90deg,#e8edf4,#f4f7fb,#e8edf4);background-size:200% 100%}
 
 /* Search, forms, and preview. */
-html:is([data-theme="light"],[data-theme="pokkie"]) .input-search,
-html:is([data-theme="light"],[data-theme="pokkie"]) .create-form input,
-html:is([data-theme="light"],[data-theme="pokkie"]) .create-form textarea,
-html:is([data-theme="light"],[data-theme="pokkie"]) .create-form select,
-html:is([data-theme="light"],[data-theme="pokkie"]) .auth-form input{background:#fff;border-color:#cbd7e4;color:#1c2b3a}
-html:is([data-theme="light"],[data-theme="pokkie"]) .input-search input{color:#1c2b3a}
-html:is([data-theme="light"],[data-theme="pokkie"]) .create-form input::placeholder,
-html:is([data-theme="light"],[data-theme="pokkie"]) .create-form textarea::placeholder,
-html:is([data-theme="light"],[data-theme="pokkie"]) .auth-form input::placeholder{color:#64778b}
-html:is([data-theme="light"],[data-theme="pokkie"]) .create-form label,
-html:is([data-theme="light"],[data-theme="pokkie"]) .auth-form label{color:#344a60}
-html:is([data-theme="light"],[data-theme="pokkie"]) .create-form label small,
-html:is([data-theme="light"],[data-theme="pokkie"]) .form-footer>span,
-html:is([data-theme="light"],[data-theme="pokkie"]) .table-header,
-html:is([data-theme="light"],[data-theme="pokkie"]) .submission-table-head{color:#536579}
-html:is([data-theme="light"],[data-theme="pokkie"]) .table-header,
-html:is([data-theme="light"],[data-theme="pokkie"]) .submission-table-head,
-html:is([data-theme="light"],[data-theme="pokkie"]) .form-footer,
-html:is([data-theme="light"],[data-theme="pokkie"]) .preview-body{border-color:var(--line)}
-html:is([data-theme="light"],[data-theme="pokkie"]) .back-link{color:#455c75}
-html:is([data-theme="light"],[data-theme="pokkie"]) .back-link:hover{color:#1f4f9b}
-html:is([data-theme="light"],[data-theme="pokkie"]) .ai-parse-btn{background:#f0ebfa;border-color:#d9c9ef;color:#593d91}
-html:is([data-theme="light"],[data-theme="pokkie"]) .ai-parse-btn:hover{background:#e9e0f7}
-html:is([data-theme="light"],[data-theme="pokkie"]) .ai-parse-btn span{color:#674f9b}
-html:is([data-theme="light"],[data-theme="pokkie"]) .preview-body>h2,
-html:is([data-theme="light"],[data-theme="pokkie"]) .preview-body h4,
-html:is([data-theme="light"],[data-theme="pokkie"]) .markdown h1,
-html:is([data-theme="light"],[data-theme="pokkie"]) .markdown h2,
-html:is([data-theme="light"],[data-theme="pokkie"]) .markdown h3{color:#1b2c3e}
-html:is([data-theme="light"],[data-theme="pokkie"]) .markdown{color:#344a60}
-html:is([data-theme="light"],[data-theme="pokkie"]) .markdown code{background:#eaf0f7;color:#204d84}
-html:is([data-theme="light"],[data-theme="pokkie"]) .markdown pre{background:#f3f6fa;border-color:var(--line)}
-html:is([data-theme="light"],[data-theme="pokkie"]) .markdown pre code{background:transparent}
-html:is([data-theme="light"],[data-theme="pokkie"]) .topic-list span,
-html:is([data-theme="light"],[data-theme="pokkie"]) .topic-chip{background:#eee9fa;color:#593d91}
+html:is([data-theme="light"],[data-theme="pookie"]) .input-search,
+html:is([data-theme="light"],[data-theme="pookie"]) .create-form input,
+html:is([data-theme="light"],[data-theme="pookie"]) .create-form textarea,
+html:is([data-theme="light"],[data-theme="pookie"]) .create-form select,
+html:is([data-theme="light"],[data-theme="pookie"]) .auth-form input{background:#fff;border-color:#cbd7e4;color:#1c2b3a}
+html:is([data-theme="light"],[data-theme="pookie"]) .input-search input{color:#1c2b3a}
+html:is([data-theme="light"],[data-theme="pookie"]) .create-form input::placeholder,
+html:is([data-theme="light"],[data-theme="pookie"]) .create-form textarea::placeholder,
+html:is([data-theme="light"],[data-theme="pookie"]) .auth-form input::placeholder{color:#64778b}
+html:is([data-theme="light"],[data-theme="pookie"]) .create-form label,
+html:is([data-theme="light"],[data-theme="pookie"]) .auth-form label{color:#344a60}
+html:is([data-theme="light"],[data-theme="pookie"]) .create-form label small,
+html:is([data-theme="light"],[data-theme="pookie"]) .form-footer>span,
+html:is([data-theme="light"],[data-theme="pookie"]) .table-header,
+html:is([data-theme="light"],[data-theme="pookie"]) .submission-table-head{color:#536579}
+html:is([data-theme="light"],[data-theme="pookie"]) .table-header,
+html:is([data-theme="light"],[data-theme="pookie"]) .submission-table-head,
+html:is([data-theme="light"],[data-theme="pookie"]) .form-footer,
+html:is([data-theme="light"],[data-theme="pookie"]) .preview-body{border-color:var(--line)}
+html:is([data-theme="light"],[data-theme="pookie"]) .back-link{color:#455c75}
+html:is([data-theme="light"],[data-theme="pookie"]) .back-link:hover{color:#1f4f9b}
+html:is([data-theme="light"],[data-theme="pookie"]) .ai-parse-btn{background:#f0ebfa;border-color:#d9c9ef;color:#593d91}
+html:is([data-theme="light"],[data-theme="pookie"]) .ai-parse-btn:hover{background:#e9e0f7}
+html:is([data-theme="light"],[data-theme="pookie"]) .ai-parse-btn span{color:#674f9b}
+html:is([data-theme="light"],[data-theme="pookie"]) .preview-body>h2,
+html:is([data-theme="light"],[data-theme="pookie"]) .preview-body h4,
+html:is([data-theme="light"],[data-theme="pookie"]) .markdown h1,
+html:is([data-theme="light"],[data-theme="pookie"]) .markdown h2,
+html:is([data-theme="light"],[data-theme="pookie"]) .markdown h3{color:#1b2c3e}
+html:is([data-theme="light"],[data-theme="pookie"]) .markdown{color:#344a60}
+html:is([data-theme="light"],[data-theme="pookie"]) .markdown code{background:#eaf0f7;color:#204d84}
+html:is([data-theme="light"],[data-theme="pookie"]) .markdown pre{background:#f3f6fa;border-color:var(--line)}
+html:is([data-theme="light"],[data-theme="pookie"]) .markdown pre code{background:transparent}
+html:is([data-theme="light"],[data-theme="pookie"]) .topic-list span,
+html:is([data-theme="light"],[data-theme="pookie"]) .topic-chip{background:#eee9fa;color:#593d91}
 
 /* Solve problem workspace, tests, and result drawer. */
-html:is([data-theme="light"],[data-theme="pokkie"]) .problem-pane,
-html:is([data-theme="light"],[data-theme="pokkie"]) .editor-pane{background:#fff}
-html:is([data-theme="light"],[data-theme="pokkie"]) .workspace-top,
-html:is([data-theme="light"],[data-theme="pokkie"]) .problem-pane,
-html:is([data-theme="light"],[data-theme="pokkie"]) .problem-title-head,
-html:is([data-theme="light"],[data-theme="pokkie"]) .problem-tabs,
-html:is([data-theme="light"],[data-theme="pokkie"]) .editor-toolbar,
-html:is([data-theme="light"],[data-theme="pokkie"]) .results-drawer,
-html:is([data-theme="light"],[data-theme="pokkie"]) .result-tabs,
-html:is([data-theme="light"],[data-theme="pokkie"]) .editor-footer,
-html:is([data-theme="light"],[data-theme="pokkie"]) .tests-panel,
-html:is([data-theme="light"],[data-theme="pokkie"]) .test-card,
-html:is([data-theme="light"],[data-theme="pokkie"]) .test-body,
-html:is([data-theme="light"],[data-theme="pokkie"]) .compact-case,
-html:is([data-theme="light"],[data-theme="pokkie"]) .run-case,
-html:is([data-theme="light"],[data-theme="pokkie"]) .submission-code-heading{border-color:var(--line)}
-html:is([data-theme="light"],[data-theme="pokkie"]) .workspace-crumb,
-html:is([data-theme="light"],[data-theme="pokkie"]) .problem-title-head h1,
-html:is([data-theme="light"],[data-theme="pokkie"]) .problem-scroll h3,
-html:is([data-theme="light"],[data-theme="pokkie"]) .submission-code-heading h2{color:#1b2c3e}
-html:is([data-theme="light"],[data-theme="pokkie"]) .autosave,
-html:is([data-theme="light"],[data-theme="pokkie"]) .editor-saved,
-html:is([data-theme="light"],[data-theme="pokkie"]) .icon-btn,
-html:is([data-theme="light"],[data-theme="pokkie"]) .problem-scroll>p,
-html:is([data-theme="light"],[data-theme="pokkie"]) .test-card summary,
-html:is([data-theme="light"],[data-theme="pokkie"]) .test-type,
-html:is([data-theme="light"],[data-theme="pokkie"]) .test-body small,
-html:is([data-theme="light"],[data-theme="pokkie"]) .editor-footer,
-html:is([data-theme="light"],[data-theme="pokkie"]) .muted,
-html:is([data-theme="light"],[data-theme="pokkie"]) .compact-case,
-html:is([data-theme="light"],[data-theme="pokkie"]) .running,
-html:is([data-theme="light"],[data-theme="pokkie"]) .run-case,
-html:is([data-theme="light"],[data-theme="pokkie"]) .run-summary>span:last-child{color:#526579}
-html:is([data-theme="light"],[data-theme="pokkie"]) .icon-btn:hover{background:#edf2f8;color:#1c2b3a}
-html:is([data-theme="light"],[data-theme="pokkie"]) .problem-tabs button,
-html:is([data-theme="light"],[data-theme="pokkie"]) .result-tabs button{color:#526579}
-html:is([data-theme="light"],[data-theme="pokkie"]) .problem-tabs button.selected,
-html:is([data-theme="light"],[data-theme="pokkie"]) .result-tabs button.active{color:#1e4f9d}
-html:is([data-theme="light"],[data-theme="pokkie"]) .problem-tabs button span,
-html:is([data-theme="light"],[data-theme="pokkie"]) .result-tabs button span,
-html:is([data-theme="light"],[data-theme="pokkie"]) .test-head h3 span{background:#e8eef5;color:#455b71}
-html:is([data-theme="light"],[data-theme="pokkie"]) .constraint-box,
-html:is([data-theme="light"],[data-theme="pokkie"]) .test-card{background:#f7f9fc;color:#344a60}
-html:is([data-theme="light"],[data-theme="pokkie"]) .test-card{border-color:#d4dfe9}
-html:is([data-theme="light"],[data-theme="pokkie"]) .test-index{color:#526579}
-html:is([data-theme="light"],[data-theme="pokkie"]) .test-body pre,
-html:is([data-theme="light"],[data-theme="pokkie"]) .output-comparison pre,
-html:is([data-theme="light"],[data-theme="pokkie"]) .execution-error pre{background:#edf2f8;border-color:#d5dfe9;color:#23384d}
-html:is([data-theme="light"],[data-theme="pokkie"]) .test-body pre{color:#23384d}
-html:is([data-theme="light"],[data-theme="pokkie"]) .mini-btn,
-html:is([data-theme="light"],[data-theme="pokkie"]) .run-btn,
-html:is([data-theme="light"],[data-theme="pokkie"]) .reset-code-btn{background:#edf2f8;border-color:#cbd7e4;color:#274056}
-html:is([data-theme="light"],[data-theme="pokkie"]) .mini-btn:hover,
-html:is([data-theme="light"],[data-theme="pokkie"]) .run-btn:hover,
-html:is([data-theme="light"],[data-theme="pokkie"]) .reset-code-btn:hover{background:#e0e9f5;color:#173551}
-html:is([data-theme="light"],[data-theme="pokkie"]) .language-select,
-html:is([data-theme="light"],[data-theme="pokkie"]) .language-select select{color:#285cae}
-html:is([data-theme="light"],[data-theme="pokkie"]) .language-select option{background:#fff;color:#1c2b3a}
-html:is([data-theme="light"],[data-theme="pokkie"]) .compact-case code,
-html:is([data-theme="light"],[data-theme="pokkie"]) .run-case summary>small,
-html:is([data-theme="light"],[data-theme="pokkie"]) .run-case summary>svg,
-html:is([data-theme="light"],[data-theme="pokkie"]) .output-comparison label,
-html:is([data-theme="light"],[data-theme="pokkie"]) .execution-error label{color:#526579}
-html:is([data-theme="light"],[data-theme="pokkie"]) .submission-table-row:hover,
-html:is([data-theme="light"],[data-theme="pokkie"]) .workspace-submission:hover{background:#edf3fb}
-html:is([data-theme="light"],[data-theme="pokkie"]) .submission-table-row>span:last-child,
-html:is([data-theme="light"],[data-theme="pokkie"]) .workspace-submission time,
-html:is([data-theme="light"],[data-theme="pokkie"]) .submission-detail-meta small,
-html:is([data-theme="light"],[data-theme="pokkie"]) .submission-code-heading span,
-html:is([data-theme="light"],[data-theme="pokkie"]) .submission-code-loading{color:#526579}
+html:is([data-theme="light"],[data-theme="pookie"]) .problem-pane,
+html:is([data-theme="light"],[data-theme="pookie"]) .editor-pane{background:#fff}
+html:is([data-theme="light"],[data-theme="pookie"]) .workspace-top,
+html:is([data-theme="light"],[data-theme="pookie"]) .problem-pane,
+html:is([data-theme="light"],[data-theme="pookie"]) .problem-title-head,
+html:is([data-theme="light"],[data-theme="pookie"]) .problem-tabs,
+html:is([data-theme="light"],[data-theme="pookie"]) .editor-toolbar,
+html:is([data-theme="light"],[data-theme="pookie"]) .results-drawer,
+html:is([data-theme="light"],[data-theme="pookie"]) .result-tabs,
+html:is([data-theme="light"],[data-theme="pookie"]) .editor-footer,
+html:is([data-theme="light"],[data-theme="pookie"]) .tests-panel,
+html:is([data-theme="light"],[data-theme="pookie"]) .test-card,
+html:is([data-theme="light"],[data-theme="pookie"]) .test-body,
+html:is([data-theme="light"],[data-theme="pookie"]) .compact-case,
+html:is([data-theme="light"],[data-theme="pookie"]) .run-case,
+html:is([data-theme="light"],[data-theme="pookie"]) .submission-code-heading{border-color:var(--line)}
+html:is([data-theme="light"],[data-theme="pookie"]) .workspace-crumb,
+html:is([data-theme="light"],[data-theme="pookie"]) .problem-title-head h1,
+html:is([data-theme="light"],[data-theme="pookie"]) .problem-scroll h3,
+html:is([data-theme="light"],[data-theme="pookie"]) .submission-code-heading h2{color:#1b2c3e}
+html:is([data-theme="light"],[data-theme="pookie"]) .autosave,
+html:is([data-theme="light"],[data-theme="pookie"]) .editor-saved,
+html:is([data-theme="light"],[data-theme="pookie"]) .icon-btn,
+html:is([data-theme="light"],[data-theme="pookie"]) .problem-scroll>p,
+html:is([data-theme="light"],[data-theme="pookie"]) .test-card summary,
+html:is([data-theme="light"],[data-theme="pookie"]) .test-type,
+html:is([data-theme="light"],[data-theme="pookie"]) .test-body small,
+html:is([data-theme="light"],[data-theme="pookie"]) .editor-footer,
+html:is([data-theme="light"],[data-theme="pookie"]) .muted,
+html:is([data-theme="light"],[data-theme="pookie"]) .compact-case,
+html:is([data-theme="light"],[data-theme="pookie"]) .running,
+html:is([data-theme="light"],[data-theme="pookie"]) .run-case,
+html:is([data-theme="light"],[data-theme="pookie"]) .run-summary>span:last-child{color:#526579}
+html:is([data-theme="light"],[data-theme="pookie"]) .icon-btn:hover{background:#edf2f8;color:#1c2b3a}
+html:is([data-theme="light"],[data-theme="pookie"]) .problem-tabs button,
+html:is([data-theme="light"],[data-theme="pookie"]) .result-tabs button{color:#526579}
+html:is([data-theme="light"],[data-theme="pookie"]) .problem-tabs button.selected,
+html:is([data-theme="light"],[data-theme="pookie"]) .result-tabs button.active{color:#1e4f9d}
+html:is([data-theme="light"],[data-theme="pookie"]) .problem-tabs button span,
+html:is([data-theme="light"],[data-theme="pookie"]) .result-tabs button span,
+html:is([data-theme="light"],[data-theme="pookie"]) .test-head h3 span{background:#e8eef5;color:#455b71}
+html:is([data-theme="light"],[data-theme="pookie"]) .constraint-box,
+html:is([data-theme="light"],[data-theme="pookie"]) .test-card{background:#f7f9fc;color:#344a60}
+html:is([data-theme="light"],[data-theme="pookie"]) .test-card{border-color:#d4dfe9}
+html:is([data-theme="light"],[data-theme="pookie"]) .test-index{color:#526579}
+html:is([data-theme="light"],[data-theme="pookie"]) .test-body pre,
+html:is([data-theme="light"],[data-theme="pookie"]) .output-comparison pre,
+html:is([data-theme="light"],[data-theme="pookie"]) .execution-error pre{background:#edf2f8;border-color:#d5dfe9;color:#23384d}
+html:is([data-theme="light"],[data-theme="pookie"]) .test-body pre{color:#23384d}
+html:is([data-theme="light"],[data-theme="pookie"]) .mini-btn,
+html:is([data-theme="light"],[data-theme="pookie"]) .run-btn,
+html:is([data-theme="light"],[data-theme="pookie"]) .reset-code-btn{background:#edf2f8;border-color:#cbd7e4;color:#274056}
+html:is([data-theme="light"],[data-theme="pookie"]) .mini-btn:hover,
+html:is([data-theme="light"],[data-theme="pookie"]) .run-btn:hover,
+html:is([data-theme="light"],[data-theme="pookie"]) .reset-code-btn:hover{background:#e0e9f5;color:#173551}
+html:is([data-theme="light"],[data-theme="pookie"]) .language-select,
+html:is([data-theme="light"],[data-theme="pookie"]) .language-select select{color:#285cae}
+html:is([data-theme="light"],[data-theme="pookie"]) .language-select option{background:#fff;color:#1c2b3a}
+html:is([data-theme="light"],[data-theme="pookie"]) .compact-case code,
+html:is([data-theme="light"],[data-theme="pookie"]) .run-case summary>small,
+html:is([data-theme="light"],[data-theme="pookie"]) .run-case summary>svg,
+html:is([data-theme="light"],[data-theme="pookie"]) .output-comparison label,
+html:is([data-theme="light"],[data-theme="pookie"]) .execution-error label{color:#526579}
+html:is([data-theme="light"],[data-theme="pookie"]) .submission-table-row:hover,
+html:is([data-theme="light"],[data-theme="pookie"]) .workspace-submission:hover{background:#edf3fb}
+html:is([data-theme="light"],[data-theme="pookie"]) .submission-table-row>span:last-child,
+html:is([data-theme="light"],[data-theme="pookie"]) .workspace-submission time,
+html:is([data-theme="light"],[data-theme="pookie"]) .submission-detail-meta small,
+html:is([data-theme="light"],[data-theme="pookie"]) .submission-code-heading span,
+html:is([data-theme="light"],[data-theme="pookie"]) .submission-code-loading{color:#526579}
 
 /* Alerts and semantic status colors keep their meaning in both themes. */
-html:is([data-theme="light"],[data-theme="pokkie"]) .error-banner{background:#fff0f0;border-color:#edb8bd;color:#9b2534}
-html:is([data-theme="light"],[data-theme="pokkie"]) .ai-generation-notice{background:#e9f6ee;border-color:#bddfc9;color:#176c4b}
-html:is([data-theme="light"],[data-theme="pokkie"]) .required,
-html:is([data-theme="light"],[data-theme="pokkie"]) .run-error,
-html:is([data-theme="light"],[data-theme="pokkie"]) .run-summary.rejected strong,
-html:is([data-theme="light"],[data-theme="pokkie"]) .run-case .fail-text,
-html:is([data-theme="light"],[data-theme="pokkie"]) .run-case pre,
-html:is([data-theme="light"],[data-theme="pokkie"]) .execution-error pre{color:#a3333d}
-html:is([data-theme="light"],[data-theme="pokkie"]) .unverified{color:#82500c}
-html:is([data-theme="light"],[data-theme="pokkie"]) .preview-live,
-html:is([data-theme="light"],[data-theme="pokkie"]) .run-summary.accepted strong,
-html:is([data-theme="light"],[data-theme="pokkie"]) .run-case .pass-text{color:#176c4b}
+html:is([data-theme="light"],[data-theme="pookie"]) .error-banner{background:#fff0f0;border-color:#edb8bd;color:#9b2534}
+html:is([data-theme="light"],[data-theme="pookie"]) .ai-generation-notice{background:#e9f6ee;border-color:#bddfc9;color:#176c4b}
+html:is([data-theme="light"],[data-theme="pookie"]) .required,
+html:is([data-theme="light"],[data-theme="pookie"]) .run-error,
+html:is([data-theme="light"],[data-theme="pookie"]) .run-summary.rejected strong,
+html:is([data-theme="light"],[data-theme="pookie"]) .run-case .fail-text,
+html:is([data-theme="light"],[data-theme="pookie"]) .run-case pre,
+html:is([data-theme="light"],[data-theme="pookie"]) .execution-error pre{color:#a3333d}
+html:is([data-theme="light"],[data-theme="pookie"]) .unverified{color:#82500c}
+html:is([data-theme="light"],[data-theme="pookie"]) .preview-live,
+html:is([data-theme="light"],[data-theme="pookie"]) .run-summary.accepted strong,
+html:is([data-theme="light"],[data-theme="pookie"]) .run-case .pass-text{color:#176c4b}
 
 /* Authentication pages and code illustration. */
-html:is([data-theme="light"],[data-theme="pokkie"]) .auth-page{background:var(--bg)}
-html:is([data-theme="light"],[data-theme="pokkie"]) .auth-visual{background:radial-gradient(ellipse at 28% 41%,#dfeafe 0,transparent 48%),#edf3fc;border-color:var(--line)}
-html:is([data-theme="light"],[data-theme="pokkie"]) .visual-copy>.eyebrow,
-html:is([data-theme="light"],[data-theme="pokkie"]) .visual-copy>p,
-html:is([data-theme="light"],[data-theme="pokkie"]) .auth-footer,
-html:is([data-theme="light"],[data-theme="pokkie"]) .form-sub,
-html:is([data-theme="light"],[data-theme="pokkie"]) .auth-switch,
-html:is([data-theme="light"],[data-theme="pokkie"]) .auth-secure{color:#526579}
-html:is([data-theme="light"],[data-theme="pokkie"]) .visual-copy h1,
-html:is([data-theme="light"],[data-theme="pokkie"]) .auth-form h2{color:#1b2c3e}
-html:is([data-theme="light"],[data-theme="pokkie"]) .visual-copy h1 em,
-html:is([data-theme="light"],[data-theme="pokkie"]) .auth-form>.eyebrow{color:#285cae}
-html:is([data-theme="light"],[data-theme="pokkie"]) .code-preview{background:#fff;border-color:#d3deeb;box-shadow:0 15px 40px #35537d1f}
-html:is([data-theme="light"],[data-theme="pokkie"]) .code-head,
-html:is([data-theme="light"],[data-theme="pokkie"]) .code-status{border-color:var(--line);color:#526579}
-html:is([data-theme="light"],[data-theme="pokkie"]) .code-preview pre{color:#293e55}
-html:is([data-theme="light"],[data-theme="pokkie"]) .code-preview pre b,
-html:is([data-theme="light"],[data-theme="pokkie"]) .code-head>span:last-child{color:#526579}
-html:is([data-theme="light"],[data-theme="pokkie"]) .code-purple{color:#6546a2}
-html:is([data-theme="light"],[data-theme="pokkie"]) .code-blue{color:#285cae}
-html:is([data-theme="light"],[data-theme="pokkie"]) .code-status span:first-child{color:#176c4b}
-html:is([data-theme="light"],[data-theme="pokkie"]) .mobile-brand{color:#1b2c3e}
-@media(max-width:720px){html:is([data-theme="light"],[data-theme="pokkie"]) .sidebar{background:#fff;border-color:var(--line)}}
+html:is([data-theme="light"],[data-theme="pookie"]) .auth-page{background:var(--bg)}
+html:is([data-theme="light"],[data-theme="pookie"]) .auth-visual{background:radial-gradient(ellipse at 28% 41%,#dfeafe 0,transparent 48%),#edf3fc;border-color:var(--line)}
+html:is([data-theme="light"],[data-theme="pookie"]) .visual-copy>.eyebrow,
+html:is([data-theme="light"],[data-theme="pookie"]) .visual-copy>p,
+html:is([data-theme="light"],[data-theme="pookie"]) .auth-footer,
+html:is([data-theme="light"],[data-theme="pookie"]) .form-sub,
+html:is([data-theme="light"],[data-theme="pookie"]) .auth-switch,
+html:is([data-theme="light"],[data-theme="pookie"]) .auth-secure{color:#526579}
+html:is([data-theme="light"],[data-theme="pookie"]) .visual-copy h1,
+html:is([data-theme="light"],[data-theme="pookie"]) .auth-form h2{color:#1b2c3e}
+html:is([data-theme="light"],[data-theme="pookie"]) .visual-copy h1 em,
+html:is([data-theme="light"],[data-theme="pookie"]) .auth-form>.eyebrow{color:#285cae}
+html:is([data-theme="light"],[data-theme="pookie"]) .code-preview{background:#fff;border-color:#d3deeb;box-shadow:0 15px 40px #35537d1f}
+html:is([data-theme="light"],[data-theme="pookie"]) .code-head,
+html:is([data-theme="light"],[data-theme="pookie"]) .code-status{border-color:var(--line);color:#526579}
+html:is([data-theme="light"],[data-theme="pookie"]) .code-preview pre{color:#293e55}
+html:is([data-theme="light"],[data-theme="pookie"]) .code-preview pre b,
+html:is([data-theme="light"],[data-theme="pookie"]) .code-head>span:last-child{color:#526579}
+html:is([data-theme="light"],[data-theme="pookie"]) .code-purple{color:#6546a2}
+html:is([data-theme="light"],[data-theme="pookie"]) .code-blue{color:#285cae}
+html:is([data-theme="light"],[data-theme="pookie"]) .code-status span:first-child{color:#176c4b}
+html:is([data-theme="light"],[data-theme="pookie"]) .mobile-brand{color:#1b2c3e}
+@media(max-width:720px){html:is([data-theme="light"],[data-theme="pookie"]) .sidebar{background:#fff;border-color:var(--line)}}
