@@ -4,5 +4,5 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App.jsx';
 import './style.css';
 import './light.css';
-import './pokkie.css';
+import './pookie.css';
 createRoot(document.getElementById('root')).render(<React.StrictMode><BrowserRouter><App/></BrowserRouter></React.StrictMode>);
